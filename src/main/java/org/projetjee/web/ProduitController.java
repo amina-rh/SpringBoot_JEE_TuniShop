@@ -5,9 +5,12 @@ import java.util.List;
 import org.projetjee.dao.ProduitRepository;
 import org.projetjee.entities.Produit;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 //Puisque c'est un controleur, il daut utiliser l'annotaion controller
 @Controller
@@ -27,12 +30,22 @@ public class ProduitController {
 	}
 	
 	@GetMapping(path="/products")
-	public String products(Model model) {
-		//Récupérer tout les produits dans un liste ensuite il faut stocker la liste dans le modèle: donc il faut le déclarer dans l'entête de la méthode 
-		List<Produit> produits=produitRepository.findAll();
+	//Récupérer les paramètres
+	public String products(Model model, 
+			@RequestParam(name="page", defaultValue = "0")int page,
+			//içi même si nous avons x produits, on lui demande de nous envoyer que 5
+			@RequestParam(name="size", defaultValue="5") int size) {
+		//Récupérer tout les produits dans un liste ou page ensuite il faut stocker la liste dans le modèle: donc il faut le déclarer dans l'entête de la méthode  List<Produit> produits=produitRepository.findAll();
+		
+		//On utilise page et size que nous avons reçu comme paramètre
+		Page<Produit> pageProduits=produitRepository.findAll(PageRequest.of(page, size));
 		//On stocke dans le modèle un attribut =clé quis'appelle listProduits dont la valeur est la liste des produits
 		//Ensuite dans la vue il faut écrire le code thymeleaf pour faire une boucle sur les produits qui se trouve dans la liste des produits revenir vers la vue ==> products.html
-		model.addAttribute("listProduits", produits);
+		model.addAttribute("pageProduits", pageProduits);
+		//Ajouter un attribut qui s'appelle pages et on créer un tableau de dimensions = nombre de pages ==> avoir les pages dans le modèle
+		model.addAttribute("currentPage", page);
+		model.addAttribute("size", size);
+		model.addAttribute("pages", new int[pageProduits.getTotalPages()]);
 		return "products";
 	}
 

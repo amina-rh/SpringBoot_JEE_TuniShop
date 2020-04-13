@@ -17,8 +17,8 @@
 		<tr>
 			<th>ID</th><th>DES</th><th>Prix</th><th>Quantité</th>
 		</tr>
-		<!--Créer une boucle: th:each  Demander à Thymeleaf de génerer tr autant de fois que nous avons de produit p dans  listProduits : il cherche un attribut appelé listProduit, il récupére la liste et il fait un foreach-->
-		<tr th:each="p:${listProduits}">
+		<!--Créer une boucle: th:each  Demander à Thymeleaf de génerer tr autant de fois que nous avons de produit p dans  listProduits : il cherche un attribut appelé listProduit, il récupére la liste et il fait un foreach et on parcour le contenu de la page-->
+		<tr th:each="p:${pageProduits.content}">
 		<!-- pour afficher la valeur d'une variable on utilise p.id il fait appel au getter getId ;) -->
 			<td th:text="${p.id}"></td>
 			<td th:text="${p.designation}"></td>
@@ -27,6 +27,16 @@
 		</tr>
 		
 	</table>
+	<!-- créer un lien et faire la même chose en boucle -->
+	<ul class="nav nav-pills">
+		<!-- créer une bare de navigation -->
+		<li th:each="page,status:${pages}">
+		<!-- si je clique sur le numéro de la page, la page correspondante s'affiche -->
+		<!-- th:class="" càd appliquer une classe css suite à une condition: si je suis sur la page coourrante japplique la classe btn-primary sinon j'applique la classe btn -->
+		<a th:class="${status.index==currentPage?'btn btn-primary':'btn'}" th:href="@{products(page=${status.index}, size=${size})}" 
+			th:text="${status.index}"></a>
+		</li>
+	</ul>
 		</div>
 	</div>
 	
