@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--Déclarer le namespace xmlns de thymeleaf avec le préfixe qu'on utilise qui est th -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Produits</title>
+	<!-- Design bootstrap -->
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container mt-5">
+	<div class="card">
+		<div class="card-header">Liste de produits</div>
+		<div class="card-body">
+		<!-- Créer un tableau pour afficher la liste des produits -->
+		<table class="table">
+		<tr>
+			<th>ID</th><th>DES</th><th>Prix</th><th>Quantité</th>
+		</tr>
+		<!--Créer une boucle: th:each  Demander à Thymeleaf de génerer tr autant de fois que nous avons de produit p dans  listProduits : il cherche un attribut appelé listProduit, il récupére la liste et il fait un foreach-->
+		<tr th:each="p:${listProduits}">
+		<!-- pour afficher la valeur d'une variable on utilise p.id il fait appel au getter getId ;) -->
+			<td th:text="${p.id}"></td>
+			<td th:text="${p.designation}"></td>
+			<td th:text="${p.prix}"></td>
+			<td th:text="${p.quantite}"></td>
+		</tr>
+		
+	</table>
+		</div>
+	</div>
+	
+</div>	
+</body>
+</html>
