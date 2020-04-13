@@ -12,6 +12,23 @@
 	<div class="card">
 		<div class="card-header">Liste de produits</div>
 		<div class="card-body">
+		
+		<!-- création d'un formulaire: Barre de recherche + bouton -->
+		<form th:action="@{products}" method="get">
+			<!-- la classe mb-3 permet d'ajouter un petit espace MarginButtom -->
+			<div class="mb-3">
+				<label class="control-label">Mot clé:</label>
+				<!-- th:value="${motCle}" permet de récupérer le mot clé saisit par l'utilisateur dans la barre de recherche -->
+				<input type="text" name="motCle" th:value="${motCle}" class="p-1"/>
+				<button class="btn btn-primary">Chercher</button>
+			</div>
+		
+		</form>
+		
+		
+		
+		
+		
 		<!-- Créer un tableau pour afficher la liste des produits -->
 		<table class="table">
 		<tr>
@@ -24,6 +41,7 @@
 			<td th:text="${p.designation}"></td>
 			<td th:text="${p.prix}"></td>
 			<td th:text="${p.quantite}"></td>
+			
 		</tr>
 		
 	</table>
@@ -33,8 +51,9 @@
 		<li th:each="page,status:${pages}">
 		<!-- si je clique sur le numéro de la page, la page correspondante s'affiche -->
 		<!-- th:class="" càd appliquer une classe css suite à une condition: si je suis sur la page coourrante japplique la classe btn-primary sinon j'applique la classe btn -->
-		<a th:class="${status.index==currentPage?'btn btn-primary':'btn'}" th:href="@{products(page=${status.index}, size=${size})}" 
-			th:text="${status.index}"></a>
+		<a th:class="${status.index==currentPage?'btn btn-primary':'btn'}" 
+		   th:href="@{products(page=${status.index}, size=${size},motCle=${motCle})}" 
+		   th:text="${status.index}"></a>
 		</li>
 	</ul>
 		</div>
