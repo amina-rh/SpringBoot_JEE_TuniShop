@@ -41,7 +41,10 @@
 			<td th:text="${p.designation}"></td>
 			<td th:text="${p.prix}"></td>
 			<td th:text="${p.quantite}"></td>
-			
+			<!-- Pouvoir supprimer un article! là il faut penser à la sécurité! car cette solution n'est pas sécurisée: affichage de l'id. il ne faut pas utiliser ça avec get -->
+			<!-- Afficher un message produit supprimé -->
+			<td><a onclick="javascript:return confirm('Voulez-vous vraiment supprimer ce produit?')" class="btn btn-danger" 
+			th:href="@{deleteProduit(id=${p.id},page=${currentPage}, size=${size}, motCle=${motCle})}">Delete</a></td>
 		</tr>
 		
 	</table>
