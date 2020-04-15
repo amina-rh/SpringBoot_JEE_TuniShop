@@ -53,7 +53,30 @@
 	</table>
 	
 	<!-- FIN VERSION 1 DE PRESENTATION DES PRODUITS  -->
-
+	
+	
+	
+	<!-- VERSION 2 DE PRESENTATION DES PRODUITS  -->
+	
+      <div class="row">
+        <!--Photos 1 à gauche-->
+        <tr th:each="p:${pageProduits.content}">
+          <div class="col-lg-4">
+            <br>
+            <img th:src="${p.photo}"  alt="PhotoProduit" style="width:200px;height:200px">
+            <h6 th:text="${p.designation}" > </h6>
+            <h6 th:text="${p.prix}"> </h6>
+            <h6 th:text="${p.quantite}"> </h6>          
+            <br>
+          </div>
+		</tr>
+      </div>
+      
+      <!--FIN VERSION 2 DE PRESENTATION DES PRODUITS -->
+      
+      
+      
+      
 	<!-- créer un lien et faire la même chose en boucle -->
 	<ul class="nav nav-pills">
 		<!-- créer une bare de navigation -->
