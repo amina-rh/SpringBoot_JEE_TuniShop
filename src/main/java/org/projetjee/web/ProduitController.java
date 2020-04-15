@@ -34,7 +34,7 @@ public class ProduitController {
 	public String products(Model model, 
 			@RequestParam(name="page", defaultValue = "0")int page,
 			//içi même si nous avons x produits, on lui demande de nous envoyer que 5
-			@RequestParam(name="size", defaultValue="5") int size,
+			@RequestParam(name="size", defaultValue="6") int size,
 			//Ajouter le paramètre motCle qui contient le mot recherché saisit par l'utilisateur
 			@RequestParam(name="motCle", defaultValue="")String motCle
 			) {

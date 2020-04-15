@@ -24,9 +24,12 @@ public class MyCatalogueApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		produitRepository.save(new Produit(null,"Ordi HP 5643",6500,54));
-		produitRepository.save(new Produit(null,"Imprimante HP 1122",345,11));
-		produitRepository.save(new Produit(null,"Smart Phone S9",1200,145));
+		produitRepository.save(new Produit(null,"jacket",70,9,"https://zupimages.net/up/20/16/a8m6.jpg"));
+		produitRepository.save(new Produit(null,"Habit Tunisien",90,11,"https://zupimages.net/up/20/16/r646.jpg"));
+		produitRepository.save(new Produit(null,"Jupe Traditionnelle",150,3,"https://zupimages.net/up/20/16/y1d5.jpg"));
+		produitRepository.save(new Produit(null,"Traditional clothes",110,4,"https://zupimages.net/up/20/16/bzpm.jpg"));
+		produitRepository.save(new Produit(null,"Habit Tunisien",90,11,"https://zupimages.net/up/20/16/r646.jpg"));
+		produitRepository.save(new Produit(null,"Jupe Traditionnelle",150,3,"https://zupimages.net/up/20/16/y1d5.jpg"));
 		
 		//La méthode findAll() permet d'avoir tout les produits. Pour avoir que la première page on utilise PageRequest.of(numéro de la page, numéro des éléments). Il retourne un objet de type page
 		//finByDesignation permet de chercher selon un mot clé

@@ -24,5 +24,6 @@ public class Produit {
 	private String designation;
 	private double prix;
 	private double quantite;
+	private String photo;
 	
 }

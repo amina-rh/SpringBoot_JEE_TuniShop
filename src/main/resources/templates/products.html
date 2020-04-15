@@ -8,10 +8,14 @@
 	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css" />
 </head>
 <body>
+
 <div class="container mt-5">
 	<div class="card">
 		<div class="card-header">Liste de produits</div>
 		<div class="card-body">
+		
+		
+				
 		
 		<!-- création d'un formulaire: Barre de recherche + bouton -->
 		<form th:action="@{products}" method="get">
@@ -25,14 +29,12 @@
 		
 		</form>
 		
-		
-		
-		
+		<!-- VERSION 1 DE PRESENTATION DES PRODUITS  -->
 		
 		<!-- Créer un tableau pour afficher la liste des produits -->
 		<table class="table">
 		<tr>
-			<th>ID</th><th>DES</th><th>Prix</th><th>Quantité</th>
+			<th>ID</th><th>DES</th><th>Prix</th><th>Quantité</th><th>Photo</th>
 		</tr>
 		<!--Créer une boucle: th:each  Demander à Thymeleaf de génerer tr autant de fois que nous avons de produit p dans  listProduits : il cherche un attribut appelé listProduit, il récupére la liste et il fait un foreach et on parcour le contenu de la page-->
 		<tr th:each="p:${pageProduits.content}">
@@ -41,6 +43,7 @@
 			<td th:text="${p.designation}"></td>
 			<td th:text="${p.prix}"></td>
 			<td th:text="${p.quantite}"></td>
+			<td> <img th:src="${p.photo}"  alt="PhotoProduit" style="width:50px;height:50px"></td>
 			<!-- Pouvoir supprimer un article! là il faut penser à la sécurité! car cette solution n'est pas sécurisée: affichage de l'id. il ne faut pas utiliser ça avec get -->
 			<!-- Afficher un message produit supprimé -->
 			<td><a onclick="javascript:return confirm('Voulez-vous vraiment supprimer ce produit?')" class="btn btn-danger" 
@@ -48,6 +51,9 @@
 		</tr>
 		
 	</table>
+	
+	<!-- FIN VERSION 1 DE PRESENTATION DES PRODUITS  -->
+
 	<!-- créer un lien et faire la même chose en boucle -->
 	<ul class="nav nav-pills">
 		<!-- créer une bare de navigation -->
