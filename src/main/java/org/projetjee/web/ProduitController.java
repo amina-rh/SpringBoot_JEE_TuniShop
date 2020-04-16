@@ -56,6 +56,7 @@ public class ProduitController {
 		return "products";
 	}
 	
+	//Supprimer un produit
 	@GetMapping(path="/deleteProduit")
 	//On pense à récupérer toutes les paramètres
 	public String delete(Long id, String motCle, String page, String size ) {

@@ -4,93 +4,103 @@
 <head>
 <meta charset="utf-8">
 <title>Produits</title>
-	<!-- Design bootstrap -->
-	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css" />
+<!-- Design bootstrap -->
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css" />
+<!-- LINK CSS FILE -->
+<link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
 </head>
 <body>
 
-<div class="container mt-5">
-	<div class="card">
-		<div class="card-header">Liste de produits</div>
-		<div class="card-body">
-		
-		
-				
-		
-		<!-- création d'un formulaire: Barre de recherche + bouton -->
-		<form th:action="@{products}" method="get">
-			<!-- la classe mb-3 permet d'ajouter un petit espace MarginButtom -->
-			<div class="mb-3">
-				<label class="control-label">Mot clé:</label>
-				<!-- th:value="${motCle}" permet de récupérer le mot clé saisit par l'utilisateur dans la barre de recherche -->
-				<input type="text" name="motCle" th:value="${motCle}" class="p-1"/>
-				<button class="btn btn-primary">Chercher</button>
-			</div>
-		
-		</form>
-		
-		<!-- VERSION 1 DE PRESENTATION DES PRODUITS  -->
-		
-		<!-- Créer un tableau pour afficher la liste des produits -->
-		<table class="table">
-		<tr>
-			<th>ID</th><th>DES</th><th>Prix</th><th>Quantité</th><th>Photo</th>
-		</tr>
-		<!--Créer une boucle: th:each  Demander à Thymeleaf de génerer tr autant de fois que nous avons de produit p dans  listProduits : il cherche un attribut appelé listProduit, il récupére la liste et il fait un foreach et on parcour le contenu de la page-->
-		<tr th:each="p:${pageProduits.content}">
-		<!-- pour afficher la valeur d'une variable on utilise p.id il fait appel au getter getId ;) -->
-			<td th:text="${p.id}"></td>
-			<td th:text="${p.designation}"></td>
-			<td th:text="${p.prix}"></td>
-			<td th:text="${p.quantite}"></td>
-			<td> <img th:src="${p.photo}"  alt="PhotoProduit" style="width:50px;height:50px"></td>
-			<!-- Pouvoir supprimer un article! là il faut penser à la sécurité! car cette solution n'est pas sécurisée: affichage de l'id. il ne faut pas utiliser ça avec get -->
-			<!-- Afficher un message produit supprimé -->
-			<td><a onclick="javascript:return confirm('Voulez-vous vraiment supprimer ce produit?')" class="btn btn-danger" 
-			th:href="@{deleteProduit(id=${p.id},page=${currentPage}, size=${size}, motCle=${motCle})}">Delete</a></td>
-		</tr>
-		
-	</table>
-	
-	<!-- FIN VERSION 1 DE PRESENTATION DES PRODUITS  -->
-	
-	
-	
-	<!-- VERSION 2 DE PRESENTATION DES PRODUITS  -->
-	
-      <div class="row">
-        <!--Photos 1 à gauche-->
-        <tr th:each="p:${pageProduits.content}">
-          <div class="col-lg-4">
-            <br>
-            <img th:src="${p.photo}"  alt="PhotoProduit" style="width:200px;height:200px">
-            <h6 th:text="${p.designation}" > </h6>
-            <h6 th:text="${p.prix}"> </h6>
-            <h6 th:text="${p.quantite}"> </h6>          
-            <br>
-          </div>
-		</tr>
-      </div>
-      
-      <!--FIN VERSION 2 DE PRESENTATION DES PRODUITS -->
-      
-      
-      
-      
-	<!-- créer un lien et faire la même chose en boucle -->
-	<ul class="nav nav-pills">
-		<!-- créer une bare de navigation -->
-		<li th:each="page,status:${pages}">
-		<!-- si je clique sur le numéro de la page, la page correspondante s'affiche -->
-		<!-- th:class="" càd appliquer une classe css suite à une condition: si je suis sur la page coourrante japplique la classe btn-primary sinon j'applique la classe btn -->
-		<a th:class="${status.index==currentPage?'btn btn-primary':'btn'}" 
-		   th:href="@{products(page=${status.index}, size=${size},motCle=${motCle})}" 
-		   th:text="${status.index}"></a>
-		</li>
-	</ul>
+	<!-- DEBUT HEADER -->
+	<div class="header-container">
+
+		<div class="site-name">TuniShop</div>
+
+		<div class="header-bar">
+			
+			<button type="button">S'inscrire</button>
+			<button type="button">Se connecter</button>
+			<button type="button">Panier</button>
+
 		</div>
+
 	</div>
-	
-</div>	
+	<!-- FIN HEADER -->
+
+	<!-- DEBUT BODY -->
+	<div class="container mt-5">
+		<div class="card">
+			<div class="card-header">Liste de produits</div>
+			<div class="card-body">
+
+
+
+
+				<!-- création d'un formulaire: Barre de recherche + bouton -->
+				<form th:action="@{products}" method="get">
+					<!-- la classe mb-3 permet d'ajouter un petit espace MarginButtom -->
+					<div class="mb-3">
+						<label class="control-label">Mot clé:</label>
+						<!-- th:value="${motCle}" permet de récupérer le mot clé saisit par l'utilisateur dans la barre de recherche -->
+						<input type="text" name="motCle" th:value="${motCle}" class="p-1" />
+						<button class="btn btn-primary">Chercher</button>
+					</div>
+
+				</form>
+
+
+				<!-- VERSION 2 DE PRESENTATION DES PRODUITS  -->
+
+				<div class="row">
+					<!--Photos 1 à gauche-->
+					<tr th:each="p:${pageProduits.content}">
+						<div class="col-lg-4">
+							<br> <img th:src="${p.photo}" alt="PhotoProduit"
+								style="width: 200px; height: 200px">
+							<h6 th:text="${p.designation}"></h6>
+							<h6 th:text="'Prix: '+${p.prix}"></h6>
+							<h6 th:text="'Quantité: '+${p.quantite}"></h6>
+							<!-- Pouvoir supprimer un article! là il faut penser à la sécurité! car cette solution n'est pas sécurisée: affichage de l'id. il ne faut pas utiliser ça avec get -->
+							<!-- Afficher un message produit supprimé -->
+							<a
+								onclick="javascript:return confirm('Voulez-vous vraiment supprimer ce produit?')"
+								class="btn btn-danger"
+								th:href="@{deleteProduit(id=${p.id},page=${currentPage}, size=${size}, motCle=${motCle})}">Delete</a>
+							<br>
+						</div>
+					</tr>
+				</div>
+
+				<!--FIN VERSION 2 DE PRESENTATION DES PRODUITS -->
+
+
+
+
+				<!-- créer un lien et faire la même chose en boucle -->
+				<ul class="nav nav-pills">
+					<!-- créer une bare de navigation -->
+					<li th:each="page,status:${pages}">
+						<!-- si je clique sur le numéro de la page, la page correspondante s'affiche -->
+						<!-- th:class="" càd appliquer une classe css suite à une condition: si je suis sur la page coourrante japplique la classe btn-primary sinon j'applique la classe btn -->
+						<a th:class="${status.index==currentPage?'btn btn-primary':'btn'}"
+						th:href="@{products(page=${status.index}, size=${size},motCle=${motCle})}"
+						th:text="${status.index}"></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+	<!-- FIN BODY -->
+
+	<!-- DEBUT FOOTER -->
+	<div class="footer-container">
+
+		<h6>© 2020 TuniShop.Tous droits réservés</h6>
+		<a href="#">Politique de confidentialité</a>
+	</div>
+	<!-- FIN FOOTER -->
+
 </body>
 </html>
