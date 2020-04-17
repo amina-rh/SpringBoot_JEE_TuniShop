@@ -24,12 +24,18 @@ public class MyCatalogueApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		produitRepository.save(new Produit(null,"jacket",70,9,"https://zupimages.net/up/20/16/a8m6.jpg"));
-		produitRepository.save(new Produit(null,"Habit Tunisien",90,11,"https://zupimages.net/up/20/16/r646.jpg"));
+		produitRepository.save(new Produit(null,"La Farmla, le gilet traditionnel tunisien",70,9,"https://zupimages.net/up/20/16/a8m6.jpg"));
+		produitRepository.save(new Produit(null,"Jebba Homme tunisienne",300,3,"https://zupimages.net/up/20/16/tw7p.jpg"));
+		produitRepository.save(new Produit(null,"La Farmla, le gilet de mariée",90,11,"https://zupimages.net/up/20/16/r646.jpg"));
 		produitRepository.save(new Produit(null,"Jupe Traditionnelle",150,3,"https://zupimages.net/up/20/16/y1d5.jpg"));
-		produitRepository.save(new Produit(null,"Traditional clothes",110,4,"https://zupimages.net/up/20/16/bzpm.jpg"));
-		produitRepository.save(new Produit(null,"Habit Tunisien",90,11,"https://zupimages.net/up/20/16/r646.jpg"));
-		produitRepository.save(new Produit(null,"Jupe Traditionnelle",150,3,"https://zupimages.net/up/20/16/y1d5.jpg"));
+		produitRepository.save(new Produit(null,"La Farmla, le gilet traditionnel tunisien",110,4,"https://zupimages.net/up/20/16/bzpm.jpg"));
+		produitRepository.save(new Produit(null,"La chéchia",90,10,"https://zupimages.net/up/20/16/e1j2.jpg"));
+		produitRepository.save(new Produit(null,"Chaussures traditionnelles pour Jebba",100,11,"https://zupimages.net/up/20/16/z2g7.jpg"));
+		produitRepository.save(new Produit(null,"Tabdila",300,4,"https://zupimages.net/up/20/16/w74a.jpg"));
+		produitRepository.save(new Produit(null,"Pull Fadhila rouge",30,7,"https://zupimages.net/up/20/16/dm8y.jpg"));
+		produitRepository.save(new Produit(null,"Pull Fadhila bleu",30,15,"https://zupimages.net/up/20/16/63jh.jpg"));
+		produitRepository.save(new Produit(null,"Maliya revisitée",30,15,"https://zupimages.net/up/20/16/qjnm.jpg"));
+		produitRepository.save(new Produit(null,"Tabdila",30,15,"https://zupimages.net/up/20/16/9u0v.jpg"));
 		
 		//La méthode findAll() permet d'avoir tout les produits. Pour avoir que la première page on utilise PageRequest.of(numéro de la page, numéro des éléments). Il retourne un objet de type page
 		//finByDesignation permet de chercher selon un mot clé

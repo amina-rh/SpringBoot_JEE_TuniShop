@@ -8,65 +8,92 @@
 <link rel="stylesheet" type="text/css"
 	href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css" />
 <!-- LINK CSS FILE -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+<link rel="icon" type="image/png"
+	href="https://zupimages.net/up/20/16/k287.jpg" />
+
+
 </head>
 <body>
 
 	<!-- DEBUT HEADER -->
 	<div class="header-container">
-
-		<div class="site-name">TuniShop</div>
-
-		<div class="header-bar">
-			
-			<button type="button">S'inscrire</button>
-			<button type="button">Se connecter</button>
-			<button type="button">Panier</button>
-
+		<div class="site-name">
+			<a href="https://zupimages.net/viewer.php?id=20/16/wge5.png"> <img
+				src="https://zupimages.net/up/20/16/wge5.png" alt="" height="60x"
+				width="250x">
+			</a>
 		</div>
+		<div class="header-bar">
+			<!--BOUTONS -->
+			<button type="button" class="btn"
+				style="background: #E70014; color: white">
+				Compte <span class="fa fa-user"> </span>
+			</button>
 
+			<button type="button" class="btn"
+				style="background: #E70014; color: white"; >
+				Favoris <span class="fa fa-heart"></span>
+			</button>
+
+			<button type="button" class="btn"
+				style="background: #E70014; color: white";>
+				Panier <span class="fa fa-shopping-cart"></span>
+			</button>
+			<!--BOUTONS -->
+		</div>
 	</div>
+
 	<!-- FIN HEADER -->
 
 	<!-- DEBUT BODY -->
+
 	<div class="container mt-5">
 		<div class="card">
-			<div class="card-header">Liste de produits</div>
+			<div class="card-header" style="color: #E70014; font-size:200%; font-family:fantasy;">Nos produits</div>
 			<div class="card-body">
-
-
-
 
 				<!-- création d'un formulaire: Barre de recherche + bouton -->
 				<form th:action="@{products}" method="get">
 					<!-- la classe mb-3 permet d'ajouter un petit espace MarginButtom -->
-					<div class="mb-3">
-						<label class="control-label">Mot clé:</label>
+					<div class="input-group">
 						<!-- th:value="${motCle}" permet de récupérer le mot clé saisit par l'utilisateur dans la barre de recherche -->
-						<input type="text" name="motCle" th:value="${motCle}" class="p-1" />
-						<button class="btn btn-primary">Chercher</button>
+						<input type="text" placeholder= "Taper votre recherche"; name="motCle" th:value="${motCle}"class="form-control" size="70"
+							style="height: 40px; "/>
+							
+							<button class="btn" style="color: #E70014;width: 130px; height: 40px; font-weight: bold;"><span class="fa fa-search"></span>Chercher</button>		
 					</div>
-
 				</form>
 
-
 				<!-- VERSION 2 DE PRESENTATION DES PRODUITS  -->
-
 				<div class="row">
 					<!--Photos 1 à gauche-->
 					<tr th:each="p:${pageProduits.content}">
 						<div class="col-lg-4">
+						<div class="card mt-2 ml-5">
+							<div class="card-body">
+					
 							<br> <img th:src="${p.photo}" alt="PhotoProduit"
-								style="width: 200px; height: 200px">
+								style="width: 250px; height: 250px">
 							<h6 th:text="${p.designation}"></h6>
-							<h6 th:text="'Prix: '+${p.prix}"></h6>
-							<h6 th:text="'Quantité: '+${p.quantite}"></h6>
+							<h6 class="fa fa-tag" th:text="'    '+${p.prix} + ' €'"></h6>
+							</br>
+							<h6 class="fa fa-table" th:text="'  Quantité restante: '+${p.quantite}
+							  +' articles '"></h6>
+							</br>
 							<!-- Pouvoir supprimer un article! là il faut penser à la sécurité! car cette solution n'est pas sécurisée: affichage de l'id. il ne faut pas utiliser ça avec get -->
 							<!-- Afficher un message produit supprimé -->
-							<a
-								onclick="javascript:return confirm('Voulez-vous vraiment supprimer ce produit?')"
-								class="btn btn-danger"
-								th:href="@{deleteProduit(id=${p.id},page=${currentPage}, size=${size}, motCle=${motCle})}">Delete</a>
+
+							<div class="card-footer">
+							<button
+								onclick="javascript:return confirm('Voulez-vous vraiment ajouter ce produit au panier?')"
+								class="btn" style="color:#E70014;" 
+								th:href="@{deleteProduit(id=${p.id},page=${currentPage}, size=${size}, motCle=${motCle})}"><span class="fa fa-cart-plus">  </span>  Ajouter au panier  </button>
+								</div>
+								</div>
+								</div>
 							<br>
 						</div>
 					</tr>
@@ -75,18 +102,27 @@
 				<!--FIN VERSION 2 DE PRESENTATION DES PRODUITS -->
 
 
+<hr>
 
-
+<hr>
 				<!-- créer un lien et faire la même chose en boucle -->
+				  <ul class="pagination justify-content-center">
 				<ul class="nav nav-pills">
+				<li class="page-item">
+     			<a class="page-link" style="color:#E70014;" href="#" tabindex="-1">Précédent</a>
+    			</li>
 					<!-- créer une bare de navigation -->
 					<li th:each="page,status:${pages}">
 						<!-- si je clique sur le numéro de la page, la page correspondante s'affiche -->
 						<!-- th:class="" càd appliquer une classe css suite à une condition: si je suis sur la page coourrante japplique la classe btn-primary sinon j'applique la classe btn -->
-						<a th:class="${status.index==currentPage?'btn btn-primary':'btn'}"
+						<a style="color:#E70014;" th:class="${status.index==currentPage?'btn btn-secondary':'btn'}"
 						th:href="@{products(page=${status.index}, size=${size},motCle=${motCle})}"
 						th:text="${status.index}"></a>
 					</li>
+					<li class="page-item">
+     				 <a class="page-link" style="color:#E70014;"href="#">Suivant</a>
+   					 </li>
+				</ul>
 				</ul>
 			</div>
 		</div>
@@ -95,12 +131,113 @@
 	<!-- FIN BODY -->
 
 	<!-- DEBUT FOOTER -->
-	<div class="footer-container">
 
-		<h6>© 2020 TuniShop.Tous droits réservés</h6>
-		<a href="#">Politique de confidentialité</a>
-	</div>
-	<!-- FIN FOOTER -->
+	<footer class="page-footer" style="color: white; background: #E70014;">
+		<hr>
+
+		<div class="container text-center text-md-left mt-5">
+
+			<!-- Grid row -->
+			<div class="row mt-3">
+				<!-- Grid column -->
+				<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+					<!-- Content -->
+					<h6 class="text-uppercase font-weight-bold">Tunishop</h6>
+					<hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+						style="width: 60px;">
+					<p>Le contenu de ce site est protégé par la loi du copyright et
+						appartient à Hiba CHAMEKH & Amina RHAIEM Le concept du site
+						TuniShop est de proposer mode et qualité des produits tunisiens au
+						meilleur prix.</p>
+
+				</div>
+				<!-- Grid column -->
+
+				<!-- Grid column -->
+				<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+					<!-- Links -->
+					<h6 class="text-uppercase font-weight-bold">Produits</h6>
+					<hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+						style="width: 60px;">
+					<p>
+						<a href="#!" style="color: white;">Femme</a>
+					</p>
+					<p>
+						<a href="#!" style="color: white;">Homme</a>
+					</p>
+					<p>
+						<a href="#!" style="color: white;">Accessoires</a>
+					</p>
+					<p>
+						<a href="#!" style="color: white;">Promotions</a>
+					</p>
+
+				</div>
+				<!-- Grid column -->
+
+				<!-- Grid column -->
+				<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+					<!-- Links -->
+					<h6 class="text-uppercase font-weight-bold">Help</h6>
+					<hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+						style="width: 60px;">
+					<p>
+						<a href="#!" style="color: white;">Service Client</a>
+					</p>
+					<p>
+						<a href="#!" style="color: white;">Mon compte</a>
+					</p>
+					<p>
+						<a href="#!" style="color: white;">Magasin</a>
+					</p>
+					<p>
+						<a href="#!" style="color: white;">Mentions Légales</a>
+					</p>
+
+
+				</div>
+				<!-- Grid column -->
+
+				<!-- Grid column -->
+				<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+					<!-- Links -->
+					<h6 class="text-uppercase font-weight-bold">Contact</h6>
+					<hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+						style="width: 60px;">
+					<p>
+						<i class="fa fa-home mr-3"></i> Tours,37000
+					</p>
+					<p>
+						<i class="fa fa-envelope mr-3"></i> TuniShop@gmail.com
+					</p>
+					<p>
+						<i class="fa fa-phone mr-3"></i> + 01 234 567 88
+					</p>
+					<p>
+						<i class="fa fa-print mr-3"></i> + 01 234 567 89
+					</p>
+
+				</div>
+				<!-- Grid column -->
+
+			</div>
+			<!-- Grid row -->
+
+		</div>
+		<!-- Footer Links -->
+
+		<!-- Copyright -->
+		<div class="footer-copyright text-center py-3">
+			© 2020 Copyright:TuniShop tous droits réservés <a href="#" style="color: white;"> 
+			
+		</div>
+		<!-- Copyright -->
+
+	</footer>
+	<!-- Footer -->
 
 </body>
 </html>
