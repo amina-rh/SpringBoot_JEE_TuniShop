@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--Déclarer le namespace xmlns de thymeleaf avec le préfixe qu'on utilise qui est th -->
 <html xmlns:th="http://www.thymeleaf.org">
@@ -13,7 +14,6 @@
 <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
 <link rel="icon" type="image/png"
 	href="https://zupimages.net/up/20/16/k287.jpg" />
-
 
 </head>
 <body>
@@ -49,51 +49,70 @@
 	<!-- FIN HEADER -->
 
 	<!-- DEBUT BODY -->
+	<div class="jumbotron big-banner"
+		style="height: 500px; padding-top: 150 px;">
+		<!-- création d'un formulaire: Barre de recherche + bouton -->
 
-	<div class="container mt-5">
-		<div class="card">
-			<div class="card-header" style="color: #E70014; font-size:200%; font-family:fantasy;">Nos produits</div>
-			<div class="card-body">
+		<div class="row d-flex justify-content-center">
 
-				<!-- création d'un formulaire: Barre de recherche + bouton -->
+			<div class="col-6">
 				<form th:action="@{products}" method="get">
 					<!-- la classe mb-3 permet d'ajouter un petit espace MarginButtom -->
 					<div class="input-group">
 						<!-- th:value="${motCle}" permet de récupérer le mot clé saisit par l'utilisateur dans la barre de recherche -->
-						<input type="text" placeholder= "Taper votre recherche"; name="motCle" th:value="${motCle}"class="form-control" size="70"
-							style="height: 40px; "/>
-							
-							<button class="btn" style="color: #E70014;width: 130px; height: 40px; font-weight: bold;"><span class="fa fa-search"></span>Chercher</button>		
+						<input type="text" placeholder="Taper votre recherche"
+							; name="motCle" th:value="${motCle}" class="form-control" />
+
+						<button class="btn"
+							style="color: #E70014; width: 130px; height: 40px; font-weight: bold;">
+							<span class="fa fa-search"></span>Chercher
+						</button>
 					</div>
-				</form>
+			</div>
+		</div>
+		</form>
+
+	</div>
+	<div class="container mt-5">
+		<div class="card">
+			<div class="card-header"
+				style="color: #E70014; font-size: 200%; font-family: fantasy;">Nos
+				produits</div>
+			<div class="card-body">
+
+
 
 				<!-- VERSION 2 DE PRESENTATION DES PRODUITS  -->
 				<div class="row">
 					<!--Photos 1 à gauche-->
 					<tr th:each="p:${pageProduits.content}">
 						<div class="col-lg-4">
-						<div class="card mt-2 ml-5">
-							<div class="card-body">
-					
-							<br> <img th:src="${p.photo}" alt="PhotoProduit"
-								style="width: 250px; height: 250px">
-							<h6 th:text="${p.designation}"></h6>
-							<h6 class="fa fa-tag" th:text="'    '+${p.prix} + ' €'"></h6>
-							</br>
-							<h6 class="fa fa-table" th:text="'  Quantité restante: '+${p.quantite}
-							  +' articles '"></h6>
-							</br>
-							<!-- Pouvoir supprimer un article! là il faut penser à la sécurité! car cette solution n'est pas sécurisée: affichage de l'id. il ne faut pas utiliser ça avec get -->
-							<!-- Afficher un message produit supprimé -->
+							<div class="card mt-2 ml-5">
+								<div class="card-body">
 
-							<div class="card-footer">
-							<button
-								onclick="javascript:return confirm('Voulez-vous vraiment ajouter ce produit au panier?')"
-								class="btn" style="color:#E70014;" 
-								th:href="@{deleteProduit(id=${p.id},page=${currentPage}, size=${size}, motCle=${motCle})}"><span class="fa fa-cart-plus">  </span>  Ajouter au panier  </button>
+									<br> <img th:src="${p.photo}" alt="PhotoProduit"
+										style="width: 250px; height: 250px">
+									<h6 th:text="${p.designation}"></h6>
+									<h6 class="fa fa-tag" th:text="'    '+${p.prix} + ' €'"></h6>
+									</br>
+									<h6 class="fa fa-table"
+										th:text="'  Quantité restante: '+${p.quantite}
+							  +' articles '"></h6>
+									</br>
+									<!-- Pouvoir supprimer un article! là il faut penser à la sécurité! car cette solution n'est pas sécurisée: affichage de l'id. il ne faut pas utiliser ça avec get -->
+									<!-- Afficher un message produit supprimé -->
+
+									<div class="card-footer">
+										<button
+											onclick="javascript:return confirm('Voulez-vous vraiment ajouter ce produit au panier?')"
+											class="btn"
+											style="color: #E70014; border: solid #E70014; font-weight: bold;"
+											th:href="@{deleteProduit(id=${p.id},page=${currentPage}, size=${size}, motCle=${motCle})}">
+											<span class="fa fa-cart-plus"> </span> Ajouter au panier
+										</button>
+									</div>
 								</div>
-								</div>
-								</div>
+							</div>
 							<br>
 						</div>
 					</tr>
@@ -102,27 +121,26 @@
 				<!--FIN VERSION 2 DE PRESENTATION DES PRODUITS -->
 
 
-<hr>
+				<hr>
 
-<hr>
+				<hr>
 				<!-- créer un lien et faire la même chose en boucle -->
-				  <ul class="pagination justify-content-center">
-				<ul class="nav nav-pills">
-				<li class="page-item">
-     			<a class="page-link" style="color:#E70014;" href="#" tabindex="-1">Précédent</a>
-    			</li>
-					<!-- créer une bare de navigation -->
-					<li th:each="page,status:${pages}">
-						<!-- si je clique sur le numéro de la page, la page correspondante s'affiche -->
-						<!-- th:class="" càd appliquer une classe css suite à une condition: si je suis sur la page coourrante japplique la classe btn-primary sinon j'applique la classe btn -->
-						<a style="color:#E70014;" th:class="${status.index==currentPage?'btn btn-secondary':'btn'}"
-						th:href="@{products(page=${status.index}, size=${size},motCle=${motCle})}"
-						th:text="${status.index}"></a>
-					</li>
-					<li class="page-item">
-     				 <a class="page-link" style="color:#E70014;"href="#">Suivant</a>
-   					 </li>
-				</ul>
+				<ul class="pagination justify-content-center">
+					<ul class="nav nav-pills">
+						<li class="page-item"><a class="page-link"
+							style="color: #E70014;" href="#" tabindex="-1">Précédent</a></li>
+						<!-- créer une bare de navigation -->
+						<li th:each="page,status:${pages}">
+							<!-- si je clique sur le numéro de la page, la page correspondante s'affiche -->
+							<!-- th:class="" càd appliquer une classe css suite à une condition: si je suis sur la page coourrante japplique la classe btn-primary sinon j'applique la classe btn -->
+							<a style="color: #E70014;"
+							th:class="${status.index==currentPage?'btn btn-secondary':'btn'}"
+							th:href="@{products(page=${status.index}, size=${size},motCle=${motCle})}"
+							th:text="${status.index}"></a>
+						</li>
+						<li class="page-item"><a class="page-link"
+							style="color: #E70014;" href="#">Suivant</a></li>
+					</ul>
 				</ul>
 			</div>
 		</div>
@@ -231,8 +249,8 @@
 
 		<!-- Copyright -->
 		<div class="footer-copyright text-center py-3">
-			© 2020 Copyright:TuniShop tous droits réservés <a href="#" style="color: white;"> 
-			
+			© 2020 Copyright:TuniShop tous droits réservés <a href="#"
+				style="color: white;">
 		</div>
 		<!-- Copyright -->
 

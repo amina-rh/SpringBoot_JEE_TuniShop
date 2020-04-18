@@ -24,13 +24,10 @@ public class ProduitController {
 	//Méthode qui permet de retourner une vue index.html. Quand on écrit index tt cours, par défaut c index.html
 	//Pour accéder à cette méthode on utilise GetMapping càd si une requete http est envoyé avec get vers path="/index" c'est cette méthode qui va s'éxecuter
 	//Il faut créer le fichier index dans le fichier ressources
-	@GetMapping(path="/index")
-	public String index() {
-		return "index";
-	}
+	
 	
 	@GetMapping(path="/products")
-	//Récupérer les paramètres
+	//Récupérer les paramètres pour effecutuer la recherche d'un produit
 	public String products(Model model, 
 			@RequestParam(name="page", defaultValue = "0")int page,
 			//içi même si nous avons x produits, on lui demande de nous envoyer que 5
@@ -56,13 +53,13 @@ public class ProduitController {
 		return "products";
 	}
 	
-	//Supprimer un produit
+	/*//Supprimer un produit
 	@GetMapping(path="/deleteProduit")
 	//On pense à récupérer toutes les paramètres
 	public String delete(Long id, String motCle, String page, String size ) {
 		produitRepository.deleteById(id);
 		//si on supprime un produit on se redirige vers la page products qui correspond aux valeurs des ces paramètres
 		return "redirect:/products?page="+page+"&motCle="+motCle+"&size="+size;
-	}
+	}*/
 
 }
