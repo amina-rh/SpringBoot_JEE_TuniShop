@@ -53,6 +53,14 @@ public class ProduitController {
 		return "products";
 	}
 	
+	//Méthode panier
+	@GetMapping(path="/panier")
+	public String panier(){
+		
+		return "panier";
+		
+	}
+	
 	/*//Supprimer un produit
 	@GetMapping(path="/deleteProduit")
 	//On pense à récupérer toutes les paramètres

@@ -18,7 +18,7 @@
 </head>
 <body>
 
-	<!-- DEBUT HEADER -->
+<!-- DEBUT HEADER -->
 	<div class="header-container">
 		<div class="site-name">
 			<a href="https://zupimages.net/viewer.php?id=20/16/wge5.png"> <img
@@ -38,39 +38,40 @@
 				Favoris <span class="fa fa-heart"></span>
 			</button>
 
-			<button type="button" class="btn"
-				style="background: #E70014; color: white";>
+			<button type="submit" class="btn"
+				style="background: #E70014; color: white">
 				Panier <span class="fa fa-shopping-cart"></span>
 			</button>
 			<!--BOUTONS -->
 		</div>
 	</div>
 
-	<!-- FIN HEADER -->
+<!-- FIN HEADER -->
 
-	<!-- DEBUT BODY -->
+<!-- DEBUT BODY -->
 	<div class="jumbotron big-banner"
 		style="height: 500px; padding-top: 150 px;">
-		<!-- création d'un formulaire: Barre de recherche + bouton -->
+<!-- BARRE DE RECHERCHE -->
 
 		<div class="row d-flex justify-content-center">
-
 			<div class="col-6">
+
 				<form th:action="@{products}" method="get">
 					<!-- la classe mb-3 permet d'ajouter un petit espace MarginButtom -->
 					<div class="input-group">
 						<!-- th:value="${motCle}" permet de récupérer le mot clé saisit par l'utilisateur dans la barre de recherche -->
 						<input type="text" placeholder="Taper votre recherche"
-							; name="motCle" th:value="${motCle}" class="form-control" />
-
+							name="motCle" th:value="${motCle}" class="form-control" />
 						<button class="btn"
 							style="color: #E70014; width: 130px; height: 40px; font-weight: bold;">
 							<span class="fa fa-search"></span>Chercher
 						</button>
 					</div>
+				</form>
+
 			</div>
 		</div>
-		</form>
+
 
 	</div>
 	<div class="container mt-5">
@@ -82,9 +83,8 @@
 
 
 
-				<!-- VERSION 2 DE PRESENTATION DES PRODUITS  -->
+<!-- VERSION 2 DE PRESENTATION DES PRODUITS  -->
 				<div class="row">
-					<!--Photos 1 à gauche-->
 					<tr th:each="p:${pageProduits.content}">
 						<div class="col-lg-4">
 							<div class="card mt-2 ml-5">
@@ -94,23 +94,26 @@
 										style="width: 250px; height: 250px">
 									<h6 th:text="${p.designation}"></h6>
 									<h6 class="fa fa-tag" th:text="'    '+${p.prix} + ' €'"></h6>
-									</br>
+									<br>
 									<h6 class="fa fa-table"
 										th:text="'  Quantité restante: '+${p.quantite}
 							  +' articles '"></h6>
-									</br>
-									<!-- Pouvoir supprimer un article! là il faut penser à la sécurité! car cette solution n'est pas sécurisée: affichage de l'id. il ne faut pas utiliser ça avec get -->
-									<!-- Afficher un message produit supprimé -->
+									<br>
+
+<!-- Boutton Ajouter au panier -->
 
 									<div class="card-footer">
-										<button
-											onclick="javascript:return confirm('Voulez-vous vraiment ajouter ce produit au panier?')"
-											class="btn"
-											style="color: #E70014; border: solid #E70014; font-weight: bold;"
-											th:href="@{deleteProduit(id=${p.id},page=${currentPage}, size=${size}, motCle=${motCle})}">
-											<span class="fa fa-cart-plus"> </span> Ajouter au panier
-										</button>
+										
+											<button onclick="window.location='panier'" class="btn"
+
+													
+													
+													style="color: #E70014; border: solid #E70014; font-weight: bold;">
+												<span class="fa fa-cart-plus"> </span> Ajouter au panier
+											</button>
+										
 									</div>
+<!-- FIN Boutton Ajouter au panier -->
 								</div>
 							</div>
 							<br>
@@ -118,13 +121,13 @@
 					</tr>
 				</div>
 
-				<!--FIN VERSION 2 DE PRESENTATION DES PRODUITS -->
+<!--FIN VERSION DE PRESENTATION DES PRODUITS -->
 
 
 				<hr>
 
 				<hr>
-				<!-- créer un lien et faire la même chose en boucle -->
+<!-- PAGINATION -->
 				<ul class="pagination justify-content-center">
 					<ul class="nav nav-pills">
 						<li class="page-item"><a class="page-link"
@@ -146,9 +149,10 @@
 		</div>
 
 	</div>
-	<!-- FIN BODY -->
+<!-- FIN PAGINATION -->
+<!-- FIN BODY -->
 
-	<!-- DEBUT FOOTER -->
+<!-- DEBUT FOOTER -->
 
 	<footer class="page-footer" style="color: white; background: #E70014;">
 		<hr>
@@ -250,7 +254,7 @@
 		<!-- Copyright -->
 		<div class="footer-copyright text-center py-3">
 			© 2020 Copyright:TuniShop tous droits réservés <a href="#"
-				style="color: white;">
+				style="color: white;"></a>
 		</div>
 		<!-- Copyright -->
 
