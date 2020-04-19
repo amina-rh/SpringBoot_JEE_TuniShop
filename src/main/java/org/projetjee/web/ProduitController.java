@@ -1,5 +1,6 @@
 package org.projetjee.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.projetjee.dao.ProduitRepository;
@@ -15,17 +16,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 //Puisque c'est un controleur, il daut utiliser l'annotaion controller
 @Controller
 public class ProduitController {
-	
+
+	List<Produit> pageProduitsPanier = new ArrayList<>();
+
 	//Afficher la liste des produits: nous avons besoins de la couche DAO
 	//Il faut décalarer l'interface ProduitRepository
 	@Autowired
 	private ProduitRepository produitRepository;
-	
+
 	//Méthode qui permet de retourner une vue index.html. Quand on écrit index tt cours, par défaut c index.html
 	//Pour accéder à cette méthode on utilise GetMapping càd si une requete http est envoyé avec get vers path="/index" c'est cette méthode qui va s'éxecuter
 	//Il faut créer le fichier index dans le fichier ressources
-	
-	
+
+
 	@GetMapping(path="/products")
 	//Récupérer les paramètres pour effecutuer la recherche d'un produit
 	public String products(Model model, 
@@ -35,9 +38,9 @@ public class ProduitController {
 			//Ajouter le paramètre motCle qui contient le mot recherché saisit par l'utilisateur
 			@RequestParam(name="motCle", defaultValue="")String motCle
 			) {
-		
+
 		//Récupérer tout les produits dans une liste ou page ensuite il faut stocker la liste dans le modèle: donc il faut le déclarer dans l'entête de la méthode  List<Produit> produits=produitRepository.findAll();
-		
+
 		//On utilise page et size que nous avons reçu comme paramètre
 		Page<Produit> pageProduits=produitRepository
 				.findByDesignationContains(motCle,PageRequest.of(page, size));
@@ -52,15 +55,19 @@ public class ProduitController {
 		model.addAttribute("pages", new int[pageProduits.getTotalPages()]);
 		return "products";
 	}
-	
+
 	//Méthode panier
-	@GetMapping(path="/panier")
-	public String panier(){
-		
+	@GetMapping(path="/AjoutPanier")
+	public String panier(Model model,Long id, String motCle, String page, String size ){
+
+		Produit pageProduitsPanierLoc= produitRepository.getOne(id);
+		pageProduitsPanier.add(pageProduitsPanierLoc);
+		model.addAttribute("pageProduitsPanier", pageProduitsPanier);
+
 		return "panier";
-		
+
 	}
-	
+
 	/*//Supprimer un produit
 	@GetMapping(path="/deleteProduit")
 	//On pense à récupérer toutes les paramètres

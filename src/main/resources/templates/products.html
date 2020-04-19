@@ -18,7 +18,7 @@
 </head>
 <body>
 
-<!-- DEBUT HEADER -->
+	<!-- DEBUT HEADER -->
 	<div class="header-container">
 		<div class="site-name">
 			<a href="https://zupimages.net/viewer.php?id=20/16/wge5.png"> <img
@@ -46,12 +46,12 @@
 		</div>
 	</div>
 
-<!-- FIN HEADER -->
+	<!-- FIN HEADER -->
 
-<!-- DEBUT BODY -->
+	<!-- DEBUT BODY -->
 	<div class="jumbotron big-banner"
 		style="height: 500px; padding-top: 150 px;">
-<!-- BARRE DE RECHERCHE -->
+		<!-- BARRE DE RECHERCHE -->
 
 		<div class="row d-flex justify-content-center">
 			<div class="col-6">
@@ -83,7 +83,7 @@
 
 
 
-<!-- VERSION 2 DE PRESENTATION DES PRODUITS  -->
+				<!-- VERSION 2 DE PRESENTATION DES PRODUITS  -->
 				<div class="row">
 					<tr th:each="p:${pageProduits.content}">
 						<div class="col-lg-4">
@@ -100,20 +100,21 @@
 							  +' articles '"></h6>
 									<br>
 
-<!-- Boutton Ajouter au panier -->
+									<!-- Boutton Ajouter au panier -->
 
 									<div class="card-footer">
-										
-											<button onclick="window.location='panier'" class="btn"
 
-													
+										<!-- <button onclick="window.location='panier'" class="btn"		
 													
 													style="color: #E70014; border: solid #E70014; font-weight: bold;">
 												<span class="fa fa-cart-plus"> </span> Ajouter au panier
-											</button>
-										
+											</button> -->
+
+										<td><a class="btn btn-danger"
+											th:href="@{AjoutPanier(id=${p.id},page=${currentPage}, size=${size}, motCle=${motCle})}"><span
+												class="fa fa-cart-plus"> </span> Ajouter au panier</a></td>
 									</div>
-<!-- FIN Boutton Ajouter au panier -->
+									<!-- FIN Boutton Ajouter au panier -->
 								</div>
 							</div>
 							<br>
@@ -121,13 +122,13 @@
 					</tr>
 				</div>
 
-<!--FIN VERSION DE PRESENTATION DES PRODUITS -->
+				<!--FIN VERSION DE PRESENTATION DES PRODUITS -->
 
 
 				<hr>
 
 				<hr>
-<!-- PAGINATION -->
+				<!-- PAGINATION -->
 				<ul class="pagination justify-content-center">
 					<ul class="nav nav-pills">
 						<li class="page-item"><a class="page-link"
@@ -149,10 +150,10 @@
 		</div>
 
 	</div>
-<!-- FIN PAGINATION -->
-<!-- FIN BODY -->
+	<!-- FIN PAGINATION -->
+	<!-- FIN BODY -->
 
-<!-- DEBUT FOOTER -->
+	<!-- DEBUT FOOTER -->
 
 	<footer class="page-footer" style="color: white; background: #E70014;">
 		<hr>
