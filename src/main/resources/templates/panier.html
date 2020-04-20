@@ -36,10 +36,7 @@
 				Favoris <span class="fa fa-heart"></span>
 			</button>
 
-			<button type="button" class="btn"
-				style="background: #E70014; color: white">
-				Valider votre Panier <span class="fa fa-shopping-cart"></span>
-			</button>
+			
 			<!--BOUTONS -->
 		</div>
 	</div>
@@ -47,10 +44,21 @@
 
 	<!-- FIN HEADER -->
 	
-	<h6 class="card-header"
-		style="color: #E70014; font-size: 200%; font-family: fantasy;">Contenu
+	<div class="card-header">
+		<h6 style="color: #E70014; font-size: 200%; font-family: fantasy;">Contenu
 		actuel de votre panier</h6>
-
+		
+		<button type="button" class="btn"
+				onclick="window.location='products'"
+				style="background: #E70014; color: white">
+				Ajouter d'autres articles <span class="fa fa-shopping-cart"></span>
+			</button>
+			
+			<button type="button" class="btn"
+				style="background: #E70014; color: white">
+				Valider votre Panier <span class="fa fa-shopping-cart"></span>
+			</button>
+	</div>
 	<div class="row">
 		<tr th:each="p:${pageProduitsPanier}">
 			<div class="col-lg-4">
