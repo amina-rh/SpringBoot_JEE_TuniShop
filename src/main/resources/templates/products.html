@@ -39,9 +39,12 @@
 			</button>
 
 			<button type="submit" class="btn"
+				onclick="window.location='AjoutPanier'"
 				style="background: #E70014; color: white">
 				Panier <span class="fa fa-shopping-cart"></span>
 			</button>
+			
+			
 			<!--BOUTONS -->
 		</div>
 	</div>
@@ -111,7 +114,7 @@
 											</button> -->
 
 										<td><a class="btn btn-danger"
-											th:href="@{AjoutPanier(id=${p.id},page=${currentPage}, size=${size}, motCle=${motCle})}"><span
+											th:href="@{AjoutPanier(idProduit=${p.id})}"><span
 												class="fa fa-cart-plus"> </span> Ajouter au panier</a></td>
 									</div>
 									<!-- FIN Boutton Ajouter au panier -->

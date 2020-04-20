@@ -58,13 +58,21 @@ public class ProduitController {
 
 	//Méthode panier
 	@GetMapping(path="/AjoutPanier")
-	public String panier(Model model,Long id, String motCle, String page, String size ){
-
-		Produit pageProduitsPanierLoc= produitRepository.getOne(id);
+	public String panier(Model model,Long idProduit ){
+		if (idProduit != null) {
+		
+		Produit pageProduitsPanierLoc= produitRepository.getOne(idProduit);
 		pageProduitsPanier.add(pageProduitsPanierLoc);
 		model.addAttribute("pageProduitsPanier", pageProduitsPanier);
 
 		return "panier";
+		}
+		
+		//Si idProduit est null càd la requete http = /AjoutPanier, on affiche le contenu du panier
+		else {
+			model.addAttribute("pageProduitsPanier", pageProduitsPanier);
+			return "panier";
+		}
 
 	}
 
