@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <!--Déclarer le namespace xmlns de thymeleaf avec le préfixe qu'on utilise qui est th -->
 <html xmlns:th="http://www.thymeleaf.org">
@@ -29,12 +30,11 @@
 		<div class="header-bar">
 			<!--BOUTONS -->
 			<a type="button" class="btn" th:href="@{login}"
-				style="background: #E70014; color: white">
-				Connexion <span class="fa fa-user"> </span>
-			</a>
-			<a type="button" class="btn" th:href="@{Login?logout}"
-				style="background: #E70014; color: white">
-				Déconnexion <span class="fa fa-user"> </span>
+				style="background: #E70014; color: white"> Connexion <span
+				class="fa fa-user"> </span>
+			</a> <a type="button" class="btn" th:href="@{Login?logout}"
+				style="background: #E70014; color: white"> Déconnexion <span
+				class="fa fa-user"> </span>
 			</a>
 			<!--<a style="background: #E70014; color: white"; th:href="@{logout}">Logout</a>  -->
 
@@ -48,8 +48,8 @@
 				style="background: #E70014; color: white">
 				Panier <span class="fa fa-shopping-cart"></span>
 			</button>
-			
-			
+
+
 			<!--BOUTONS -->
 		</div>
 	</div>
@@ -123,9 +123,15 @@
 												class="fa fa-cart-plus"> </span> Ajouter au panier</a></td>
 									</div>
 									<!-- FIN Boutton Ajouter au panier -->
+
 								</div>
+								<a
+									onclick="javascript:return confirm('Voulez-vous vraiment supprimer ce produit?')"
+									class="btn btn-light"
+									th:href="@{deleteProduit(id=${p.id},page=${currentPage}, size=${size}, motCle=${motCle})}">Rupture de stock : supprimer</a>
 							</div>
 							<br>
+
 						</div>
 					</tr>
 				</div>
@@ -148,7 +154,7 @@
 							<a style="color: #E70014;"
 							th:class="${status.index==currentPage?'btn btn-secondary':'btn'}"
 							th:href="@{products(page=${status.index}, size=${size},motCle=${motCle})}"
-							th:text="${status.index}"></a>
+							th:text="${status.index+1}"></a>
 						</li>
 						<li class="page-item"><a class="page-link"
 							style="color: #E70014;" href="#">Suivant</a></li>

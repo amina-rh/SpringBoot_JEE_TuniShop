@@ -30,6 +30,6 @@ public class Client {
 	private String motDePasseClient;
 	private String telClient;
 	
-	@OneToMany(mappedBy = "client")
-	private Collection<Commande> commandes;
+	//@OneToMany(mappedBy = "client")
+	//private Collection<Commande> commandes;
 }

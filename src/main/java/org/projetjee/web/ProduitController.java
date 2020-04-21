@@ -84,13 +84,13 @@ public class ProduitController {
 		return "login";
 	}
 
-	/*//Supprimer un produit
+//Supprimer un produit
 	@GetMapping(path="/deleteProduit")
 	//On pense à récupérer toutes les paramètres
 	public String delete(Long id, String motCle, String page, String size ) {
 		produitRepository.deleteById(id);
 		//si on supprime un produit on se redirige vers la page products qui correspond aux valeurs des ces paramètres
 		return "redirect:/products?page="+page+"&motCle="+motCle+"&size="+size;
-	}*/
+	}
 
 }
