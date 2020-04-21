@@ -1,9 +1,12 @@
 package org.projetjee.entities;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +26,10 @@ public class Produit {
 	private Long id;
 	private String designation;
 	private double prix;
-	private double quantite;
+	private int quantite;
 	private String photo;
+	
+	//@OneToMany(mappedBy = "Produit")
+	//private Collection <LigneCommande> commandeAssocie;
 	
 }

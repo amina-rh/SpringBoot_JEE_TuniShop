@@ -8,9 +8,12 @@ import org.projetjee.entities.Produit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 //Puisque c'est un controleur, il daut utiliser l'annotaion controller
@@ -64,16 +67,21 @@ public class ProduitController {
 		Produit pageProduitsPanierLoc= produitRepository.getOne(idProduit);
 		pageProduitsPanier.add(pageProduitsPanierLoc);
 		model.addAttribute("pageProduitsPanier", pageProduitsPanier);
-
 		return "panier";
 		}
-		
 		//Si idProduit est null càd la requete http = /AjoutPanier, on affiche le contenu du panier
 		else {
 			model.addAttribute("pageProduitsPanier", pageProduitsPanier);
 			return "panier";
 		}
 
+	}
+	
+	//Login
+
+	@GetMapping(path="/login")
+	public String login(Model model){
+		return "login";
 	}
 
 	/*//Supprimer un produit
