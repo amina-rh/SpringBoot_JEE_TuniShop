@@ -58,6 +58,14 @@
 				style="background: #E70014; color: white">
 				Valider votre Panier <span class="fa fa-shopping-cart"></span>
 			</button>
+			<br>
+			<div style="color: black; font-size: 150%; font-family: fantasy;">
+			
+		 	
+  		  <span th:text="'Le prix de votre panier est: ' + ${prixTotal} + ' €'"></span>
+		
+		
+	</div>
 	</div>
 	<div class="row">
 		<tr th:each="p:${pageProduitsPanier}">
@@ -84,7 +92,8 @@
 			</div>
 
 		</tr>
-	</div>
+		</div>
+		
 
 
 

@@ -23,6 +23,7 @@ public class Client {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idClient;
+	private String pseudo;
 	private String nomClient;
 	private String prenomClient;
 	private String adresseClient;

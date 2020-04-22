@@ -10,21 +10,32 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	@Autowired
+	private DataSource dataSource;
+	
 	//méthode permet de spécifier l'accés des utilisateurs (par défaut elle utilise le mot de passe généré dans la console"
 	//LES SEULS UTILISATEURS QUI ont accés au site sont ceux stockés dans la mémoire
 	  protected void configure(AuthenticationManagerBuilder auth) throws Exception{ 
 		  //il faut encoder le motde passe oubien dire au spring c pa la peine d'utiliser l'encodeur avec {noop}
-		  auth.inMemoryAuthentication().withUser("hiba").password("{noop}hiba").roles(
-		  "USER");
-		  auth.inMemoryAuthentication().withUser("amina").password("{noop}amina").roles(
-		  "USER");
-		  auth.inMemoryAuthentication().withUser("admin").password("{noop}admin").roles(
-		  "USER","ADMIN"); 
+			
+			 auth.inMemoryAuthentication().withUser("hiba").password("{noop}hiba").roles(
+			 "USER");
+			  auth.inMemoryAuthentication().withUser("amina").password("{noop}amina").
+			 roles( "USER");
+			 auth.inMemoryAuthentication().withUser("admin").password("{noop}admin").
+			roles( "USER","ADMIN");
+			 
+		  
+			/*
+			 * auth.jdbcAuthentication() .dataSource(dataSource)
+			 * .usersByUsernameQuery("select pseudo as principal, mot_de_passe_client as credentials from client where pseudo=?"
+			 * ) ;
+			 */
 	  }
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 	//http.formLogin();
-	 http.formLogin().loginPage("/login"); 
+		http.formLogin().loginPage("/login"); 
 		http.authorizeRequests().antMatchers("/AjoutPanier**/**").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers("/AjoutPanier**/**").hasRole("USER");
 		http.authorizeRequests().antMatchers("/deleteProduit**/**").hasRole("ADMIN");

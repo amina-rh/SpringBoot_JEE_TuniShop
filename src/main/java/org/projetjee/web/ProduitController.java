@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ProduitController {
 
-	List<Produit> pageProduitsPanier = new ArrayList<>();
+	private List<Produit> pageProduitsPanier = new ArrayList<>();
+	private double prixTotal = 0;
+	
 
 	//Afficher la liste des produits: nous avons besoins de la couche DAO
 	//Il faut décalarer l'interface ProduitRepository
@@ -61,17 +63,24 @@ public class ProduitController {
 
 	//Méthode panier
 	@GetMapping(path="/AjoutPanier")
-	public String panier(Model model,Long idProduit ){
+	public String panier(Model model,Long idProduit){
+		
 		if (idProduit != null) {
 		
 		Produit pageProduitsPanierLoc= produitRepository.getOne(idProduit);
 		pageProduitsPanier.add(pageProduitsPanierLoc);
+		
+			prixTotal = prixTotal + pageProduitsPanierLoc.getPrix();
+			
 		model.addAttribute("pageProduitsPanier", pageProduitsPanier);
+		model.addAttribute("prixTotal", prixTotal);
+		
 		return "panier";
 		}
 		//Si idProduit est null càd la requete http = /AjoutPanier, on affiche le contenu du panier
 		else {
 			model.addAttribute("pageProduitsPanier", pageProduitsPanier);
+			
 			return "panier";
 		}
 

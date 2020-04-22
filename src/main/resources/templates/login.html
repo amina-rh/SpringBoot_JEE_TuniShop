@@ -63,11 +63,11 @@
 	<!-- DEBUT FORMULAIRE -->
 	
 
-	<form th:action="@{/login}" method="get">
+	<form th:action="@{/login}" method="post">
 
 			<hr>
 			<hr>
-
+		<p th:if="${loginError}" class="error">Wrong user or password</p>
 			<!-- Name -->
 			<div class="form-row justify-content-center">
 				<div class="input-group-append">
@@ -90,8 +90,9 @@
 			<!-- Sign up button -->
 			<div class="form-row justify-content-center">
 
-				<button class="btn btn-light my-4 btn-block" type="submit"
-					name="submit"
+				<button type="submit" class="btn btn-light my-4 btn-block"
+					
+					
 					style="color: #E70014; border:#E70014; font-weight: bold; width: 300px;">Se
 					connecter</button>
 			</div>
