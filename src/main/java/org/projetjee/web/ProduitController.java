@@ -102,5 +102,9 @@ public class ProduitController {
 		//si on supprime un produit on se redirige vers la page products qui correspond aux valeurs des ces paramètres
 		return "redirect:/products?page="+page+"&motCle="+motCle+"&size="+size;
 	}
-
+	//Payment
+		@GetMapping(path="/payment")
+		public String payment (Model model){
+			return "payment";
+		}
 }
