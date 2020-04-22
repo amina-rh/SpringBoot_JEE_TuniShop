@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			
 			
 			/*
-			 * auth.jdbcAuthentication() .dataSource(dataSource)
+			 * auth.jdbcAuthentication().dataSource(dataSource)
 			 * .usersByUsernameQuery("select idutilisateur, pseudo as principal,nomutilisateur,prenomutilisateur,adresseutilisateur,mailutilisateur, password as credentials, telutilisateur from utilisateur where pseudo=?"
 			 * )
 			 * .authoritiesByUsernameQuery("select idutilisateurrole, pseudo as principal, role as role from utilisateur_role where pseudo=?"
