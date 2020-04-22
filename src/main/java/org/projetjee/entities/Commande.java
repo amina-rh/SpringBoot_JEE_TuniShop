@@ -28,8 +28,10 @@ public class Commande {
 	
 	@ManyToOne
 	@JoinColumn(name="idClient")
+
 	private Utilisateur utilisateur;
 	
 	@OneToMany(mappedBy="commande")
 	private Collection <Ligne_Commande> items;
+
 }

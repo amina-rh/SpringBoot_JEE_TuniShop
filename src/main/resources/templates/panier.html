@@ -1,8 +1,10 @@
 <!DOCTYPE html>
+
 <!--Déclarer le namespace xmlns de thymeleaf avec le préfixe qu'on utilise qui est th -->
+
 <html xmlns:th="http://www.thymeleaf.org"
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
->
+
 <head>
 <meta charset="utf-8">
 <title>Panier</title>
@@ -56,6 +58,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 				style="background: #E70014; color: white">
 				Ajouter d'autres articles <span class="fa fa-shopping-cart"></span>
 			</button>
+
 			
 	<!-- 		<button type="button" class="btn"
 				style="background: #E70014; color: white">
@@ -100,13 +103,20 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 
 
 	<!-- PRESENTATION DES PRODUITS  -->
-		<div class="row">
+
+		
+	<!-- PRESENTATION DES PRODUITS  -->
+			<div class="form-row justify-content-center">
+
+
 		<div class="col-lg-7">
 				<div class="card mt-2 ml-5">
 					<div class="card-body">
 		<table class="table" >		
 		<tr>
-			<th>DESCRIPTION</th><th>Prix</th><th>Photo</th><th>Supprimer</th>
+
+			<th>DESCRIPTION</th><th>Prix</th><th>Photo</th><th></th>
+
 		</tr>
 		<tr th:each="p:${pageProduitsPanier}">
 			<td th:text="${p.designation}"></td>
@@ -136,9 +146,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 				<tr><td style="font-weight:bold;">TOTAL </td>
 				<td style="font-weight:bold;"><span th:text="${prixTotal} + ' €'"></span></td>
 				</tr>
-				<tr><td colspan="2"><button type="button" class="btn" style="background: #E70014; color: white">
+
+				<tr><td colspan="2"><a type="button" class="btn" style="background: #E70014; color: white" th:href="@{payment}">
 				Valider votre Panier <span class="fa fa-shopping-cart"></span>
-			    </button></td> </tr> 
+			    </a></td> </tr> 
+
 		</table>
 		</div>
 		</div>

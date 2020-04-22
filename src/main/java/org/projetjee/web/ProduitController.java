@@ -103,4 +103,10 @@ public class ProduitController {
 		return "redirect:/products?page="+page+"&motCle="+motCle+"&size="+size;
 	}
 
+	//Payment
+		@GetMapping(path="/payment")
+		public String payment (Model model){
+			return "payment";
+		}
+
 }

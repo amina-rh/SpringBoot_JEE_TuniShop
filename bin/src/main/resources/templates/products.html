@@ -1,25 +1,24 @@
+
 <!DOCTYPE html>
+<!--Déclarer le namespace xmlns de thymeleaf avec le préfixe qu'on utilise qui est th -->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8" />
-<title>Authentification</title>
+<meta charset="utf-8">
+<title>Produits</title>
 <!-- Design bootstrap -->
 <link rel="stylesheet" type="text/css"
 	href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css" />
 <!-- LINK CSS FILE -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="icon" type="image/png"
-	href="https://zupimages.net/up/20/16/k287.jpg" />
 <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
 <link rel="icon" type="image/png"
 	href="https://zupimages.net/up/20/16/k287.jpg" />
 
 </head>
 <body>
-<!-- DEBUT HEADER -->
+
+	<!-- DEBUT HEADER -->
 	<div class="header-container">
 		<div class="site-name">
 			<a href="https://zupimages.net/viewer.php?id=20/16/wge5.png"> <img
@@ -29,15 +28,10 @@
 		</div>
 		<div class="header-bar">
 			<!--BOUTONS -->
-			<a type="button" class="btn" th:href="@{login}"
+			<button type="button" class="btn"
 				style="background: #E70014; color: white">
-				Connexion <span class="fa fa-user"> </span>
-			</a>
-			<a type="button" class="btn" th:href="@{Login?logout}"
-				style="background: #E70014; color: white">
-				Déconnexion <span class="fa fa-user"> </span>
-			</a>
-			<!--<a style="background: #E70014; color: white"; th:href="@{logout}">Logout</a>  -->
+				Compte <span class="fa fa-user"> </span>
+			</button>
 
 			<button type="button" class="btn"
 				style="background: #E70014; color: white"; >
@@ -49,81 +43,119 @@
 				style="background: #E70014; color: white">
 				Panier <span class="fa fa-shopping-cart"></span>
 			</button>
+			
+			
 			<!--BOUTONS -->
 		</div>
 	</div>
 
 	<!-- FIN HEADER -->
+
+	<!-- DEBUT BODY -->
+	<div class="jumbotron big-banner"
+		style="height: 500px; padding-top: 150 px;">
+		<!-- BARRE DE RECHERCHE -->
+
+		<div class="row d-flex justify-content-center">
+			<div class="col-6">
+
+				<form th:action="@{products}" method="get">
+					<!-- la classe mb-3 permet d'ajouter un petit espace MarginButtom -->
+					<div class="input-group">
+						<!-- th:value="${motCle}" permet de récupérer le mot clé saisit par l'utilisateur dans la barre de recherche -->
+						<input type="text" placeholder="Taper votre recherche"
+							name="motCle" th:value="${motCle}" class="form-control" />
+						<button class="btn"
+							style="color: #E70014; width: 130px; height: 40px; font-weight: bold;">
+							<span class="fa fa-search"></span>Chercher
+						</button>
+					</div>
+				</form>
+
+			</div>
+		</div>
+
+
+	</div>
 	<div class="container mt-5">
 		<div class="card">
 			<div class="card-header"
-				style="color: #E70014; font-size: 200%; font-family: fantasy;">Authentification</div>
-				
+				style="color: #E70014; font-size: 200%; font-family: fantasy;">Nos
+				produits</div>
+			<div class="card-body">
 
-	<!-- DEBUT FORMULAIRE -->
-	
 
-	<form th:action="@{/login}" method="post">
 
-			<hr>
-			<hr>
+				<!-- VERSION 2 DE PRESENTATION DES PRODUITS  -->
+				<div class="row">
+					<tr th:each="p:${pageProduits.content}">
+						<div class="col-lg-4">
+							<div class="card mt-2 ml-5">
+								<div class="card-body">
 
-			<!-- Name -->
-			<div class="form-row justify-content-center">
-				<div class="input-group-append">
-					<span class="input-group-text"><i class="fa fas fa-envelope"></i></span>
-					<input type="text" id="" class="form-control" name="username"
-						placeholder="pseudo" style="width: 300px; height: 30px;" value="">
+									<br> <img th:src="${p.photo}" alt="PhotoProduit"
+										style="width: 250px; height: 250px">
+									<h6 th:text="${p.designation}"></h6>
+									<h6 class="fa fa-tag" th:text="'    '+${p.prix} + ' €'"></h6>
+									<br>
+									<h6 class="fa fa-table"
+										th:text="'  Quantité restante: '+${p.quantite}
+							  +' articles '"></h6>
+									<br>
+
+									<!-- Boutton Ajouter au panier -->
+
+									<div class="card-footer">
+
+										<!-- <button onclick="window.location='panier'" class="btn"		
+													
+													style="color: #E70014; border: solid #E70014; font-weight: bold;">
+												<span class="fa fa-cart-plus"> </span> Ajouter au panier
+											</button> -->
+
+										<td><a class="btn btn-danger"
+											th:href="@{AjoutPanier(idProduit=${p.id})}"><span
+												class="fa fa-cart-plus"> </span> Ajouter au panier</a></td>
+									</div>
+									<!-- FIN Boutton Ajouter au panier -->
+								</div>
+							</div>
+							<br>
+						</div>
+					</tr>
 				</div>
-			</div>
-			<br> <br>
-			<!-- Password -->
-			<div class="form-row justify-content-center">
-				<div class="input-group-append">
-					<span class="input-group-text"><i class="fa fas fa-key"></i></span>
-					<input type="password" id="" class="form-control"
-						name="password" placeholder="Mot de passe*"
-						style="width: 300px; height: 30px;" value="">
-				</div>
-			</div>
-			<br>		
-			<!-- Sign up button -->
-			<div class="form-row justify-content-center">
 
-				<button class="btn btn-light my-4 btn-block" type="submit" 
-				
+				<!--FIN VERSION DE PRESENTATION DES PRODUITS -->
 
-					style="color: #E70014; border:solid; font-weight: bold; width: 300px;"> Se connecter </button>
 
-			</div>
-			
-			
-			
-			
+				<hr>
 
-			
-			
-			<div class="d-flex justify-content-center links">
-				Vous êtes pas inscrit ? <a href="#" class="ml-2">S'inscrire</a>
+				<hr>
+				<!-- PAGINATION -->
+				<ul class="pagination justify-content-center">
+					<ul class="nav nav-pills">
+						<li class="page-item"><a class="page-link"
+							style="color: #E70014;" href="#" tabindex="-1">Précédent</a></li>
+						<!-- créer une bare de navigation -->
+						<li th:each="page,status:${pages}">
+							<!-- si je clique sur le numéro de la page, la page correspondante s'affiche -->
+							<!-- th:class="" càd appliquer une classe css suite à une condition: si je suis sur la page coourrante japplique la classe btn-primary sinon j'applique la classe btn -->
+							<a style="color: #E70014;"
+							th:class="${status.index==currentPage?'btn btn-secondary':'btn'}"
+							th:href="@{products(page=${status.index}, size=${size},motCle=${motCle})}"
+							th:text="${status.index}"></a>
+						</li>
+						<li class="page-item"><a class="page-link"
+							style="color: #E70014;" href="#">Suivant</a></li>
+					</ul>
+				</ul>
 			</div>
-			<div class="d-flex justify-content-center links">
-				<a href="#">Mot de passe oublié ?</a>
-			</div>
-<<<<<<< HEAD
-			<br>
-			</div>
-				</div>
-=======
-			
-						<br> *Mentions obligatoires <br>
-			
-			</div>
-				</div>
-				
->>>>>>> Hiba_Branch
-	</form>
-	
-	<!-- FIN FORMULAIRE -->
+		</div>
+
+	</div>
+	<!-- FIN PAGINATION -->
+	<!-- FIN BODY -->
+
 	<!-- DEBUT FOOTER -->
 
 	<footer class="page-footer" style="color: white; background: #E70014;">
@@ -232,7 +264,6 @@
 
 	</footer>
 	<!-- Footer -->
-	
 
 </body>
 </html>

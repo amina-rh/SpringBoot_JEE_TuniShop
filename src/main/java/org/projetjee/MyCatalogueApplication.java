@@ -2,11 +2,13 @@ package org.projetjee;
 
 import java.util.List;
 
+
 import org.projetjee.dao.UtilisateurRepository;
 import org.projetjee.dao.UtilisateurRoleRepository;
 import org.projetjee.dao.ProduitRepository;
 import org.projetjee.entities.Utilisateur;
 import org.projetjee.entities.Utilisateur_Role;
+
 import org.projetjee.entities.Produit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -22,12 +24,14 @@ public class MyCatalogueApplication implements CommandLineRunner {
 	@org.springframework.beans.factory.annotation.Autowired(required=true)
 	private ProduitRepository produitRepository;
 	
+
 	@org.springframework.beans.factory.annotation.Autowired(required=true)
 	private UtilisateurRepository utilisateurRepository;
 	
 	@org.springframework.beans.factory.annotation.Autowired(required=true)
 	private UtilisateurRoleRepository utilisateurRoleRepository;
 	
+
 	public static void main(String[] args) {
 		SpringApplication.run(MyCatalogueApplication.class, args);
 	}
@@ -47,6 +51,7 @@ public class MyCatalogueApplication implements CommandLineRunner {
 		produitRepository.save(new Produit(null,"Maliya revisitée",30,15,"https://zupimages.net/up/20/16/qjnm.jpg"));
 		produitRepository.save(new Produit(null,"Tabdila",30,15,"https://zupimages.net/up/20/16/9u0v.jpg"));
 		
+
 		
 		//Utilisateur
 		utilisateurRepository.save(new Utilisateur(null,"queendev","Rhaiem","Amina","Tours","amina@gmail.com","1234","06000000"));
@@ -55,6 +60,7 @@ public class MyCatalogueApplication implements CommandLineRunner {
 		//UtilisateurRole
 		utilisateurRoleRepository.save(new Utilisateur_Role(null,"queendev","USER"));
 		
+
 		//La méthode findAll() permet d'avoir tout les produits. Pour avoir que la première page on utilise PageRequest.of(numéro de la page, numéro des éléments). Il retourne un objet de type page
 		//finByDesignation permet de chercher selon un mot clé
 		Page<Produit> produits=produitRepository.findByDesignationContains("H",PageRequest.of(0, 2));
