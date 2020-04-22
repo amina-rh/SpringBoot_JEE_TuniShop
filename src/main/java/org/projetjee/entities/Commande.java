@@ -28,8 +28,8 @@ public class Commande {
 	
 	@ManyToOne
 	@JoinColumn(name="idClient")
-	private Client client;
+	private Utilisateur utilisateur;
 	
 	@OneToMany(mappedBy="commande")
-	private Collection <LigneCommande> items;
+	private Collection <Ligne_Commande> items;
 }

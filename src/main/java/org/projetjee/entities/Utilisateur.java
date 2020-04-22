@@ -19,17 +19,17 @@ import lombok.ToString;
 
 @Data @AllArgsConstructor @NoArgsConstructor @ToString
 
-public class Client {
+public class Utilisateur {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idClient;
+	private Long idutilisateur;
 	private String pseudo;
-	private String nomClient;
-	private String prenomClient;
-	private String adresseClient;
-	private String mailClient;
-	private String motDePasseClient;
-	private String telClient;
+	private String nomutilisateur;
+	private String prenomutilisateur;
+	private String adresseutilisateur;
+	private String mailutilisateur;
+	private String password;
+	private String telutilisateur;
 	
 	//@OneToMany(mappedBy = "client")
 	//private Collection<Commande> commandes;

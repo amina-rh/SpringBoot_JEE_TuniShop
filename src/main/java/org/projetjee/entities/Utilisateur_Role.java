@@ -1,12 +1,9 @@
 package org.projetjee.entities;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,17 +13,11 @@ import lombok.ToString;
 @Entity
 
 @Data @AllArgsConstructor @NoArgsConstructor @ToString
-public class Ligne_Commande {
+public class Utilisateur_Role {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idLigneCommande;
-	private int quantiteProduit;
-	private double prixCommande;
+	private Long idutilisateurrole;
+	private String pseudo;
+	private String role;
 	
-	@ManyToOne
-	@JoinColumn(name = "idCommande")
-	private Commande commande;
-	
-	@ManyToOne
-	@JoinColumn(name = "idProduit")
-	private Produit produit;
+
 }
