@@ -1,10 +1,10 @@
 package org.projetjee;
 
+import java.util.List;
 
-import org.projetjee.dao.ClientRepository;
 import org.projetjee.dao.ProduitRepository;
-import org.projetjee.entities.Client;
 import org.projetjee.entities.Produit;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,8 +17,6 @@ public class MyCatalogueApplication implements CommandLineRunner {
 	//@Autoware remplace le constructeur
 	@org.springframework.beans.factory.annotation.Autowired(required=true)
 	private ProduitRepository produitRepository;
-	@org.springframework.beans.factory.annotation.Autowired(required=true)
-	private ClientRepository clientRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(MyCatalogueApplication.class, args);
@@ -38,11 +36,6 @@ public class MyCatalogueApplication implements CommandLineRunner {
 		produitRepository.save(new Produit(null,"Pull Fadhila bleu",30,15,"https://zupimages.net/up/20/16/63jh.jpg"));
 		produitRepository.save(new Produit(null,"Maliya revisitée",30,15,"https://zupimages.net/up/20/16/qjnm.jpg"));
 		produitRepository.save(new Produit(null,"Tabdila",30,15,"https://zupimages.net/up/20/16/9u0v.jpg"));
-		
-		//	TABLE CLIENT
-		clientRepository.save(new Client(null,"amina","Tours","amina@gmail.com","amina","Rhaiem","amina","0665526130"));
-		clientRepository.save(new Client(null,"hiba","Tours","hiba@gmail.com","hiba","Chamekh","hiba","0000000000"));
-		
 		
 		//La méthode findAll() permet d'avoir tout les produits. Pour avoir que la première page on utilise PageRequest.of(numéro de la page, numéro des éléments). Il retourne un objet de type page
 		//finByDesignation permet de chercher selon un mot clé

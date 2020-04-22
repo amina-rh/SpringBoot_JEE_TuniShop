@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <!--Déclarer le namespace xmlns de thymeleaf avec le préfixe qu'on utilise qui est th -->
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
+>
 <head>
 <meta charset="utf-8">
 <title>Produits</title>
@@ -26,10 +28,11 @@
 		</div>
 		<div class="header-bar">
 			<!--BOUTONS -->
-			<button type="button" class="btn"
-				style="background: #E70014; color: white">
-				Compte <span class="fa fa-user"> </span>
-			</button>
+				<a sec:authentication="name" style="color:red;">  </a>
+			<a  sec:authorize="isAuthenticated()" type="button" class="btn" th:href="@{Login?logout}"
+				style="background: #E70014; color: white"> Déconnexion <span
+				class="fa fa-user"> </span>
+			</a>
 
 			<button type="button" class="btn"
 				style="background: #E70014; color: white"; >
@@ -58,14 +61,14 @@
 				style="background: #E70014; color: white">
 				Valider votre Panier <span class="fa fa-shopping-cart"></span>
 			</button>
-			<br>
-			<div style="color: black; font-size: 150%; font-family: fantasy;">
 			
-		 	
-  		  <span th:text="'Le prix de votre panier est: ' + ${prixTotal} + ' €'"></span>
-		
-		
-	</div>
+			<br>
+            <div style="color: black; font-size: 150%; font-family: fantasy;">
+
+            <span th:text="'Le prix de votre panier est: ' + ${prixTotal} + ' €'"></span>
+        </div>
+			
+			
 	</div>
 	<div class="row">
 		<tr th:each="p:${pageProduitsPanier}">
@@ -92,8 +95,7 @@
 			</div>
 
 		</tr>
-		</div>
-		
+	</div>
 
 
 

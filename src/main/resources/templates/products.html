@@ -1,8 +1,8 @@
 
-
 <!DOCTYPE html>
-<!--Déclarer le namespace xmlns de thymeleaf avec le préfixe qu'on utilise qui est th -->
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
+
 <head>
 <meta charset="utf-8">
 <title>Produits</title>
@@ -29,20 +29,20 @@
 		</div>
 		<div class="header-bar">
 			<!--BOUTONS -->
-			<a type="button" class="btn" th:href="@{login}"
-				style="background: #E70014; color: white"> Connexion <span
-				class="fa fa-user"> </span>
-			</a> <a type="button" class="btn" th:href="@{Login?logout}"
+			<h7  sec:authorize="isAuthenticated()" style="color:red;font-weight:bold;"> Welcome </h7>
+			
+				<a  sec:authentication="name" style="color:red;"></a>
+				
+			<a sec:authorize="!isAuthenticated()"type="button" class="btn" th:href="@{login}"
+				style="background: #E70014; color: white"> Connexion <span class="fa fa-user"> </span></a>
+			 <a  sec:authorize="isAuthenticated()" type="button" class="btn" th:href="@{Login?logout}"
 				style="background: #E70014; color: white"> Déconnexion <span
 				class="fa fa-user"> </span>
 			</a>
-			<!--<a style="background: #E70014; color: white"; th:href="@{logout}">Logout</a>  -->
-
 			<button type="button" class="btn"
 				style="background: #E70014; color: white"; >
 				Favoris <span class="fa fa-heart"></span>
 			</button>
-
 			<button type="submit" class="btn"
 				onclick="window.location='AjoutPanier'"
 				style="background: #E70014; color: white">
@@ -63,11 +63,12 @@
 
 		<div class="row d-flex justify-content-center">
 			<div class="col-6">
-
+				<br> <br> <br><br> <br>
 				<form th:action="@{products}" method="get">
 					<!-- la classe mb-3 permet d'ajouter un petit espace MarginButtom -->
 					<div class="input-group">
 						<!-- th:value="${motCle}" permet de récupérer le mot clé saisit par l'utilisateur dans la barre de recherche -->
+						
 						<input type="text" placeholder="Taper votre recherche"
 							name="motCle" th:value="${motCle}" class="form-control" />
 						<button class="btn"
@@ -120,17 +121,21 @@
 
 										<td><a class="btn btn-danger"
 											th:href="@{AjoutPanier(idProduit=${p.id})}"><span
-												class="fa fa-cart-plus"> </span> Ajouter au panier</a></td>
+												class="fa fa-cart-plus"> </span> Ajouter au panier</a>
 									</div>
 									<!-- FIN Boutton Ajouter au panier -->
 
 								</div>
-								<a
-									onclick="javascript:return confirm('Voulez-vous vraiment supprimer ce produit?')"
+								<!-- Boutton Supprimer -->
+								<div sec:authorize="hasRole('ROLE_ADMIN')">
+									 <a onclick="javascript:return confirm('Voulez-vous vraiment supprimer ce produit?')"
 									class="btn btn-light"
-									th:href="@{deleteProduit(id=${p.id},page=${currentPage}, size=${size}, motCle=${motCle})}">Rupture
-									de stock : supprimer</a>
+									th:href="@{deleteProduit(id=${p.id},page=${currentPage}, size=${size}, motCle=${motCle})}">Rupture de stock : Supprimer</a>
+								
 							</div>
+							</div>
+							<!-- Fin Boutton Supprimer -->
+							
 							<br>
 
 						</div>

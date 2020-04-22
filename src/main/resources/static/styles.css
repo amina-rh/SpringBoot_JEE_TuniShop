@@ -48,8 +48,15 @@ body {
 }
 .big-banner{
 
-	background-image:url('https://zupimages.net/up/20/16/ecyi.png');
+	background-image:url('https://zupimages.net/up/20/17/rj9k.png');
 	background-size: 100%;
+}
+
+.input-group-text {
+  background:#E70014 ;
+  color: white;
+  border: 0;
+  border-radius: 0.25rem 0 0 0.25rem ;
 }
 
 
