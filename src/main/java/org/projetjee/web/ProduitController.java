@@ -83,6 +83,12 @@ public class ProduitController {
             return "panier";
         }
     }
+    
+    //quand on se connecte ça nous ramène à la page /products
+    @RequestMapping(value="/")
+    public String home() {
+    	return "redirect:/products";
+    }
 	
 	//Login
 	@GetMapping(path="/login")
