@@ -87,9 +87,10 @@ public class ProduitController {
 	///deleteProduitPanier
 	@GetMapping(path="/deleteProduitPanier")
 	public String deletePanier(Long id) {
-	  for(int i=0 ; i < pageProduitsPanier.size();i++) { if (id ==
-		  pageProduitsPanier.get(i).getId()) { pageProduitsPanier.remove(i); }	  
-		  }
+		for(int i=0 ; i < pageProduitsPanier.size();i++) { 
+			if (id == pageProduitsPanier.get(i).getId()) { 
+				pageProduitsPanier.remove(i); }	  
+		}
 		return "redirect:/AjoutPanier";
 	}
 
