@@ -84,22 +84,25 @@ public class ProduitController {
         }
     }
     
-    //quand on se connecte ça nous ramène à la page /products
+    ////action par défaut
     @RequestMapping(value="/")
     public String home() {
     	return "redirect:/products";
     }
 	
-	//Login
-	@GetMapping(path="/login")
-	public String login(Model model){
-		return "login";
-	}
-	//logout
-	@GetMapping(path="/logout")
-	public String logout(Model model){
-		return "login";
-	}
+	
+	  //Login
+	  @GetMapping(path="/login") public String login(Model model){ return "login";
+	  } 
+	  
+		/*
+		 * //logout
+		 * 
+		 * @GetMapping(path="/logout") public String logout(Model model){ return
+		 * "login"; }
+		 */
+	 
+    
 	//Supprimer un produit
 	@GetMapping(path="/deleteProduit")
 	//On pense à récupérer toutes les paramètres
