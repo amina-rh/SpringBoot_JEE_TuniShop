@@ -41,8 +41,8 @@
 					class="fa fa-user"> </span></a>
 
 
-				<button sec:authorize="isAuthenticated()" class="btn" type="submit" value="Sign Out"
-					style="background: #E70014; color: white">Déconnexion</button>
+				<button sec:authorize="isAuthenticated()" class="btn" type="submit"
+					value="Sign Out" style="background: #E70014; color: white">Déconnexion</button>
 
 				<!--  <a  sec:authorize="isAuthenticated()" type="button" class="btn" th:href="@{Login?logout}"
 				style="background: #E70014; color: white"> Déconnexion <span
@@ -73,8 +73,7 @@
 
 		<div class="row d-flex justify-content-center">
 			<div class="col-6">
-				<br> <br> <br>
-				<br> <br>
+				<br> <br> <br> <br> <br>
 				<form th:action="@{products}" method="get">
 					<!-- la classe mb-3 permet d'ajouter un petit espace MarginButtom -->
 					<div class="input-group">

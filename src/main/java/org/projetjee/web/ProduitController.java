@@ -61,48 +61,51 @@ public class ProduitController {
 	}
 
 	//Méthode panier
-    @GetMapping(path="/AjoutPanier")
-    public String panier(Model model,Long idProduit){
-        
-        if (idProduit != null) {
-        
-        Produit pageProduitsPanierLoc= produitRepository.getOne(idProduit);
-        pageProduitsPanier.add(pageProduitsPanierLoc);
-        
-            prixTotal = prixTotal + pageProduitsPanierLoc.getPrix();
-            
-        model.addAttribute("pageProduitsPanier", pageProduitsPanier);
-        model.addAttribute("prixTotal", prixTotal);
-        
-        return "panier";
-        }
-        //Si idProduit est null càd la requete http = /AjoutPanier, on affiche le contenu du panier
-        else {
-            model.addAttribute("pageProduitsPanier", pageProduitsPanier);
-            
-            return "panier";
-        }
-    }
-    
-    ////action par défaut
-    @RequestMapping(value="/")
-    public String home() {
-    	return "redirect:/products";
-    }
-	
-	
-	  //Login
-	  @GetMapping(path="/login") public String login(Model model){ return "login";
-	  } 
-	  
-		/*
-		 * //logout
-		 * 
-		 * @GetMapping(path="/logout") public String logout(Model model){ return
-		 * "login"; }
-		 */
-	 
-    
+	@GetMapping(path="/AjoutPanier")
+	public String panier(Model model,Long idProduit){
+
+		if (idProduit != null) {
+
+			Produit pageProduitsPanierLoc= produitRepository.getOne(idProduit);
+			pageProduitsPanier.add(pageProduitsPanierLoc);
+
+			prixTotal = prixTotal + pageProduitsPanierLoc.getPrix();
+
+			model.addAttribute("pageProduitsPanier", pageProduitsPanier);
+			model.addAttribute("prixTotal", prixTotal);
+
+			return "panier";
+		}
+		//Si idProduit est null càd la requete http = /AjoutPanier, on affiche le contenu du panier
+		else {
+			model.addAttribute("pageProduitsPanier", pageProduitsPanier);
+
+			return "panier";
+		}
+	}
+
+	///deleteProduitPanier
+	@GetMapping(path="/deleteProduitPanier")
+	public String deletePanier(Long id) {
+	  for(int i=0 ; i < pageProduitsPanier.size();i++) { if (id ==
+		  pageProduitsPanier.get(i).getId()) { pageProduitsPanier.remove(i); }	  
+		  }
+		return "redirect:/AjoutPanier";
+	}
+
+
+	////action par défaut
+	@RequestMapping(value="/")
+	public String home() {
+		return "redirect:/products";
+	}
+
+	//Login
+	@GetMapping(path="/login") 
+	public String login(Model model){
+		return "login";
+	} 
+
 	//Supprimer un produit
 	@GetMapping(path="/deleteProduit")
 	//On pense à récupérer toutes les paramètres
@@ -113,9 +116,9 @@ public class ProduitController {
 	}
 
 	//Payment
-		@GetMapping(path="/payment")
-		public String payment (Model model){
-			return "payment";
-		}
+	@GetMapping(path="/payment")
+	public String payment (Model model){
+		return "payment";
+	}
 
 }
