@@ -1,16 +1,17 @@
 package org.projetjee;
 
-import java.util.List;
-
-
 import org.projetjee.dao.UtilisateurRepository;
 import org.projetjee.dao.UtilisateurRoleRepository;
+
+
+
 import org.projetjee.dao.ProduitRepository;
+import org.projetjee.dao.RoleRepository;
 import org.projetjee.entities.Utilisateur;
 import org.projetjee.entities.Utilisateur_Role;
-
+import org.projetjee.entities.Role;
 import org.projetjee.entities.Produit;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,18 +20,21 @@ import org.springframework.data.domain.PageRequest;
 
 @SpringBootApplication
 public class MyCatalogueApplication implements CommandLineRunner {
-	
+
 	//@Autoware remplace le constructeur
 	@org.springframework.beans.factory.annotation.Autowired(required=true)
 	private ProduitRepository produitRepository;
-	
+
 
 	@org.springframework.beans.factory.annotation.Autowired(required=true)
 	private UtilisateurRepository utilisateurRepository;
-	
+
 	@org.springframework.beans.factory.annotation.Autowired(required=true)
 	private UtilisateurRoleRepository utilisateurRoleRepository;
 	
+	@org.springframework.beans.factory.annotation.Autowired(required=true)
+	private RoleRepository roleRepository;
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(MyCatalogueApplication.class, args);
@@ -50,21 +54,29 @@ public class MyCatalogueApplication implements CommandLineRunner {
 		produitRepository.save(new Produit(null,"Pull Fadhila bleu",30,15,"https://zupimages.net/up/20/16/63jh.jpg"));
 		produitRepository.save(new Produit(null,"Maliya revisitée",30,15,"https://zupimages.net/up/20/16/qjnm.jpg"));
 		produitRepository.save(new Produit(null,"Tabdila",30,15,"https://zupimages.net/up/20/16/9u0v.jpg"));
+
+
+
+		//Utilisateur
+		utilisateurRepository.save(new Utilisateur(null,"dev","1234"));
+		
+		//Role
+		
+		roleRepository.save(new Role(null,"ADMIN"));
+		roleRepository.save(new Role(null,"USER"));
 		
 
-		
-		//Utilisateur
-		utilisateurRepository.save(new Utilisateur(null,"queendev","Rhaiem","Amina","Tours","amina@gmail.com","1234","06000000"));
+		//utilisateurRepository.save(new Utilisateur(null,"queendev","1234","Amina","Tours","amina@gmail.com","1234","06000000"));
 		//clientRepository.save(new Client("queendev","1234"));
-		
+
 		//UtilisateurRole
 		utilisateurRoleRepository.save(new Utilisateur_Role(null,"queendev","USER"));
-		
+
 
 		//La méthode findAll() permet d'avoir tout les produits. Pour avoir que la première page on utilise PageRequest.of(numéro de la page, numéro des éléments). Il retourne un objet de type page
 		//finByDesignation permet de chercher selon un mot clé
 		Page<Produit> produits=produitRepository.findByDesignationContains("H",PageRequest.of(0, 2));
-		
+
 		//Afficher le nombre des éléments dans la liste (il commence par 0 ;)
 		System.out.println(produits.getSize());
 		//Afficher le nombre des enregistrements totale
@@ -72,17 +84,17 @@ public class MyCatalogueApplication implements CommandLineRunner {
 		//Afficher le nombre des pages
 		System.out.println(produits.getTotalPages());
 		//Afficher la liste des produits System.out.println(produits.getContent());
-		
+
 		//pour chaque produit p on affiche les informations
 		produits.getContent().forEach(p->{
 			System.out.print(p.toString());
-			
+
 		});
-		
+
 		System.out.println("-------------------------");
 		//Chercher tout les produits ou designation contient H, prix min =100, affciher une seule page qui contient deux éléments
 		Page<Produit> prods=produitRepository.chercher("%H%", 400, PageRequest.of(0, 2));
-		
+
 		//Afficher le nombre des éléments dans la liste (il commence par 0 ;)
 		System.out.println(prods.getSize());
 		//Afficher le nombre des enregistrements totale
@@ -90,11 +102,11 @@ public class MyCatalogueApplication implements CommandLineRunner {
 		//Afficher le nombre des pages
 		System.out.println(prods.getTotalPages());
 		//Afficher la liste des produits System.out.println(produits.getContent());
-		
+
 		//pour chaque produit p on affiche les informations
 		prods.getContent().forEach(p->{
 			System.out.print(p.toString());
-			
+
 		});
 	}
 

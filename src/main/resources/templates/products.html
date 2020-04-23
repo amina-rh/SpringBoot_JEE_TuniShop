@@ -29,18 +29,19 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 		</div>
 		<div class="header-bar">
 			<!--BOUTONS -->
-			<h7  sec:authorize="isAuthenticated()" style="color:red;font-weight:bold;"> Welcome </h7>
+			<h7 sec:authorize="isAuthenticated()" style="color:red;font-weight:bold;"> Welcome </h7>
 			
 				<a  sec:authentication="name" style="color:red;"></a>
 				
 			<a sec:authorize="!isAuthenticated()"type="button" class="btn" th:href="@{login}"
 				style="background: #E70014; color: white"> Connexion <span class="fa fa-user"> </span></a>
+				
 			 <a  sec:authorize="isAuthenticated()" type="button" class="btn" th:href="@{Login?logout}"
 				style="background: #E70014; color: white"> Déconnexion <span
 				class="fa fa-user"> </span>
 			</a>
 			<button type="button" class="btn"
-				style="background: #E70014; color: white"; >
+				style="background: #E70014; color: white" >
 				Favoris <span class="fa fa-heart"></span>
 			</button>
 			<button type="submit" class="btn"
