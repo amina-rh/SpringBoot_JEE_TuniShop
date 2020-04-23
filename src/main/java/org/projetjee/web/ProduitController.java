@@ -86,14 +86,17 @@ public class ProduitController {
 
 	///deleteProduitPanier
 	@GetMapping(path="/deleteProduitPanier")
-	public String deletePanier(Long id) {
+	public String deletePanier(Model model, Long id) {
 		for(int i=0 ; i < pageProduitsPanier.size();i++) { 
 			if (id == pageProduitsPanier.get(i).getId()) { 
-				pageProduitsPanier.remove(i); }	  
+				prixTotal = prixTotal - pageProduitsPanier.get(i).getPrix();
+				pageProduitsPanier.remove(i);
+				}	  
 		}
-		return "redirect:/AjoutPanier";
+		model.addAttribute("prixTotal", prixTotal);
+		return "panier";
+		//return "redirect:/AjoutPanier";
 	}
-
 
 	////action par défaut
 	@RequestMapping(value="/")
