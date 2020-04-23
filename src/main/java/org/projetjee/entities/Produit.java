@@ -1,9 +1,9 @@
 package org.projetjee.entities;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,8 +30,8 @@ public class Produit {
 	private int quantite;
 	private String photo;
 	
-	@OneToMany(mappedBy = "produit")
-	private List <Ligne_Commande> commandeAssocie;
+	@OneToMany(mappedBy = "produit", fetch = FetchType.EAGER)
+	private List<Ligne_Commande> commandeAssocie;
 	
 	
 	
