@@ -1,6 +1,7 @@
 package org.projetjee.entities;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +30,9 @@ public class Produit {
 	private int quantite;
 	private String photo;
 	
-	//@OneToMany(mappedBy = "Produit")
-	//private Collection <LigneCommande> commandeAssocie;
+	@OneToMany(mappedBy = "produit")
+	private List <Ligne_Commande> commandeAssocie;
+	
+	
 	
 }

@@ -17,15 +17,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//il faut encoder le motde passe oubien dire au spring c pa la peine d'utiliser l'encodeur avec {noop}
 		
 		auth.inMemoryAuthentication()
-		.withUser("hiba").password("{noop}hiba")
+		.withUser("Hiba").password("{noop}hiba")
 		.roles("USER");
 		
-		auth.inMemoryAuthentication() .withUser("amina").password("{noop}amina")
+		auth.inMemoryAuthentication() .withUser("Amina").password("{noop}amina")
 		.roles( "USER");
 		 
 		
 		auth.inMemoryAuthentication()
-		.withUser("admin").password("{noop}admin")
+		.withUser("Admin").password("{noop}admin")
 		.roles( "USER","ADMIN");
 	}
 		

@@ -2,6 +2,7 @@ package org.projetjee.entities;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,11 +28,11 @@ public class Commande {
 	private double prixCommande;
 	
 	@ManyToOne
-	@JoinColumn(name="idClient")
-
+	@JoinColumn(name="idUtilisateur")
+	//Un utilisateur peut commander plusieurs commandes ==> ManyToOne ==> Many commande to one utilisateur
 	private Utilisateur utilisateur;
 	
 	@OneToMany(mappedBy="commande")
-	private Collection <Ligne_Commande> items;
+	private List<Ligne_Commande> ligneCommande;
 
 }

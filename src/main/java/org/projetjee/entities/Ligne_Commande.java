@@ -23,10 +23,10 @@ public class Ligne_Commande {
 	private double prixCommande;
 	
 	@ManyToOne
-	@JoinColumn(name = "idCommande")
+	@JoinColumn(name="idCommande")
 	private Commande commande;
 	
 	@ManyToOne
-	@JoinColumn(name = "idProduit")
+	@JoinColumn(name="id")
 	private Produit produit;
 }
