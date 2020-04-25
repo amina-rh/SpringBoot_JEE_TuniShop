@@ -62,7 +62,7 @@ public class ProduitController {
 	@GetMapping(path="/AjoutPanier")
 	public String panier(Model model,Long idProduit){
 
-		if (idProduit != null) {
+		if (idProduit != null) { 
 
 			Produit pageProduitsPanierLoc= produitRepository.getOne(idProduit);
 			pageProduitsPanier.add(pageProduitsPanierLoc);
@@ -74,12 +74,13 @@ public class ProduitController {
 
 			return "panier";
 		}
-		//Si idProduit est null càd la requete http = /AjoutPanier, on affiche le contenu du panier
-		else {
-			model.addAttribute("pageProduitsPanier", pageProduitsPanier);
+		//Si idProduit est null càd la requete http = /AjoutPanier, on affiche le contenu du panier 
 
-			return "panier";
-		}
+		else { 
+			model.addAttribute("pageProduitsPanier", pageProduitsPanier);
+			model.addAttribute("prixTotal", prixTotal);
+			return "panier"; }
+
 	}
 
 	///deleteProduitPanier
@@ -89,12 +90,13 @@ public class ProduitController {
 			if (id == pageProduitsPanier.get(i).getId()) { 
 				prixTotal = prixTotal - pageProduitsPanier.get(i).getPrix();
 				pageProduitsPanier.remove(i);
-				}	  
+			}	  
 		}
+		model.addAttribute("pageProduitsPanier", pageProduitsPanier);
 		model.addAttribute("prixTotal", prixTotal);
-		//useless comment
-		//return "panier";
-		return "redirect:/AjoutPanier";
+
+		return "panier";
+		//return "redirect:/AjoutPanier;
 	}
 
 	////action par défaut
@@ -121,6 +123,7 @@ public class ProduitController {
 	//Payment
 	@GetMapping(path="/payment")
 	public String payment (Model model){
+		model.addAttribute("prixTotal", prixTotal);
 		return "payment";
 	}
 
