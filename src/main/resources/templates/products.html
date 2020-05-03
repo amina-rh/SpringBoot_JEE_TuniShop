@@ -44,11 +44,6 @@
 				<button sec:authorize="isAuthenticated()" class="btn" type="submit"
 					value="Sign Out" style="background: #E70014; color: white">Déconnexion</button>
 
-				<!--  <a  sec:authorize="isAuthenticated()" type="button" class="btn" th:href="@{Login?logout}"
-				style="background: #E70014; color: white"> Déconnexion <span
-				class="fa fa-user"> </span>
-			</a> -->
-
 				<button type="button" class="btn"
 					style="background: #E70014; color: white">
 					Favoris <span class="fa fa-heart"></span>
@@ -126,9 +121,9 @@
 												<span class="fa fa-cart-plus"> </span> Ajouter au panier
 											</button> -->
 
-										<td><a class="btn btn-danger"
+										<a class="btn btn-danger"
 											th:href="@{AjoutPanier(idProduit=${p.id})}"><span
-												class="fa fa-cart-plus"> </span> Ajouter au panier</a>
+											class="fa fa-cart-plus"> </span> Ajouter au panier</a>
 									</div>
 									<!-- FIN Boutton Ajouter au panier -->
 

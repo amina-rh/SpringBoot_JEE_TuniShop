@@ -96,7 +96,6 @@ public class ProduitController {
 		model.addAttribute("prixTotal", prixTotal);
 
 		return "panier";
-		//return "redirect:/AjoutPanier;
 	}
 
 	////action par défaut

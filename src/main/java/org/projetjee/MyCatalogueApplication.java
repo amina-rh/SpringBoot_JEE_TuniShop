@@ -22,7 +22,6 @@ public class MyCatalogueApplication implements CommandLineRunner {
 	@org.springframework.beans.factory.annotation.Autowired(required=true)
 	private ProduitRepository produitRepository;
 
-
 	@org.springframework.beans.factory.annotation.Autowired(required=true)
 	private UtilisateurRepository utilisateurRepository;
 
@@ -31,7 +30,6 @@ public class MyCatalogueApplication implements CommandLineRunner {
 
 	@org.springframework.beans.factory.annotation.Autowired(required=true)
 	private RoleRepository roleRepository;
-
 
 	public static void main(String[] args) {
 		SpringApplication.run(MyCatalogueApplication.class, args);
@@ -53,52 +51,15 @@ public class MyCatalogueApplication implements CommandLineRunner {
 		produitRepository.save(new Produit(null,"Tabdila",30,15,"https://zupimages.net/up/20/16/9u0v.jpg", null));
 
 		//Utilisateur
-		utilisateurRepository.save(new Utilisateur(null,"Amina","1234","Amina","Rhaiem","Tours","amina@gmail.com","06000000", null, null));
+		utilisateurRepository.save(new Utilisateur(null,"Amina","1234","Amina","Rhaiem","Tours","amina.rhaiem.94@gmail.com","06000000", null, null));
 		utilisateurRepository.save(new Utilisateur(null,"Hiba","1234","Hiba","Chameck","Tours","Hiba@gmail.com","06000000", null, null));
 		utilisateurRepository.save(new Utilisateur(null,"Admin","1234","Queen","King","Tours","Queen@gmail.com","06000000", null, null));
 
 		//Role
-
 		roleRepository.save(new Role(null,"ADMIN", null));
 		roleRepository.save(new Role(null,"USER", null));
 
-		//UtilisateurRole
-		//utilisateurRoleRepository.save(new Utilisateur_Role(null,"Amina","USER"));
-
-
-		//La méthode findAll() permet d'avoir tout les produits. Pour avoir que la première page on utilise PageRequest.of(numéro de la page, numéro des éléments). Il retourne un objet de type page
-		//finByDesignation permet de chercher selon un mot clé
-		Page<Produit> produits=produitRepository.findByDesignationContains("H",PageRequest.of(0, 2));
-
-		//Afficher le nombre des éléments dans la liste (il commence par 0 ;)
-		System.out.println(produits.getSize());
-		//Afficher le nombre des enregistrements totale
-		System.out.println(produits.getTotalElements());
-		//Afficher le nombre des pages
-		System.out.println(produits.getTotalPages());
-		//Afficher la liste des produits System.out.println(produits.getContent());
-
-		//pour chaque produit p on affiche les informations
-		produits.getContent().forEach(p->{
-			System.out.print(p.toString());
-		});
-
-		System.out.println("-------------------------");
-		//Chercher tout les produits ou designation contient H, prix min =100, affciher une seule page qui contient deux éléments
-		Page<Produit> prods=produitRepository.chercher("%H%", 400, PageRequest.of(0, 2));
-
-		//Afficher le nombre des éléments dans la liste (il commence par 0 ;)
-		System.out.println(prods.getSize());
-		//Afficher le nombre des enregistrements totale
-		System.out.println(prods.getTotalElements());
-		//Afficher le nombre des pages
-		System.out.println(prods.getTotalPages());
-		//Afficher la liste des produits System.out.println(produits.getContent());
-
-		//pour chaque produit p on affiche les informations
-		prods.getContent().forEach(p->{
-			System.out.print(p.toString());
-		});
+		
 	}
 	
 }
